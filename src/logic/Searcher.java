@@ -32,6 +32,11 @@ public interface Searcher
         return regionCityMap.get(input).toString();
     }
 
+    default boolean cityExists(String input)
+    {
+        Map<String, String> regionCityMap = storeRegionAndCitiesToMap();
+        return regionCityMap.containsKey(input);
+    }
     private Map storeCoursesIndustriesToMap()
     {
         Map<String, String> courseIndustryMap = new HashMap<>();

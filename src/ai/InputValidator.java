@@ -24,7 +24,10 @@ public class InputValidator
 
     public static boolean isValidName(String name) {
         // Define the regular expression pattern for name validation
-        String regex = "^(?i)(?:(?!.*([aeiou])\\1{1,}))(?:(?!.*([bcdfghjklmnpqrstvwxyz])\\2{1,}))(?:(?!.*[^a-zA-Z0-9\\s]))[a-zA-Z]+$\n";
+//        String regex = "^(?i)(?:(?!.*([aeiou])\\1{1,}))(?:(?!.*([bcdfghjklmnpqrstvwxyz])\\2{1,}))(?:(?!.*[^a-zA-Z0-9\\s]))[a-zA-Z]+$\n";
+//        String regex = "^(?!.*([aeiouAEIOU])\\1|.*[^a-zA-Z]+|.*[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ]{3}|.*[aeiouAEIOU]{3})[A-Za-z]*$";
+//        String regex = "^(?!.*([aeiouAEIOU])\\1|.*[^a-zA-Z]+|.*[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ]{3}|.*[aeiouAEIOU]{3})[A-Za-z]*$";
+        String regex = "^(?!.*([aeiouAEIOU])\\1|.*[^a-zA-Z]+|.*[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ]{4}|.*[aeiouAEIOU]{3})[A-Za-z]*$";
 
         // Compile the pattern
         Pattern pattern = Pattern.compile(regex);

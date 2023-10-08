@@ -1,6 +1,6 @@
 package ai;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class ThreadRerunning {
     public static void main(String[] args) {
