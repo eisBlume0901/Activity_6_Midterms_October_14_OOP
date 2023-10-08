@@ -1,4 +1,4 @@
-package logic;
+package validator;
 import java.util.*;
 import static java.lang.System.*;
 
@@ -6,60 +6,68 @@ public class Test implements InputValidator, Searcher {
     static Scanner scanner = new Scanner(System.in);
     static Test t = new Test();
     public static void main(String[] args) {
-        List<ValidationMethod> entries = new ArrayList<>();
-        int maxReruns = 5;
-        int baseSleepTime = 3000;
-        int maxSleepTime = 40000;
-        int countdownIncrease = 5000;
 
-        entries.add(new NameValidator());
-        entries.add(new AddressValidator());
-        entries.add(new MovieValidator());
-        // Add more entries as needed
+        out.println(t.isEnglishWord("Mary"));
+        out.println(t.isEnglishWord("Kate"));
+        out.println(t.isPhraseValid("Mary Kate"));
+        out.println(t.isSentenceValid("Mary Kate"));
 
-        boolean allEntriesValid = true;
-
-        int count = 0;
-        for (ValidationMethod vm : entries)
-        {
-            boolean validInput = false;
-            int rerunCount = 0;
-            int sleepTime = baseSleepTime;
-
-            while (!validInput && rerunCount < maxReruns)
-            {
-                validInput = entries.get(count).validate(); // Invoke the validate method
-                rerunCount++;
-
-                if (!validInput)
-                {
-                    if (rerunCount > 0)
-                    {
-                        sleepTime += countdownIncrease;
-                        if (sleepTime > maxSleepTime)
-                        {
-                            sleepTime = maxSleepTime;
-                        }
-                        out.println("Entry: " + count + "\nInput validation failed. Rerunning in");
-                        countdownTimer(sleepTime / 1000);
-                        out.print(" seconds...\n");
-                    }
-                }
-                if (validInput)
-                {
-                    count++;
-                    break;
-                }
-            }
-
-            if (!validInput) {
-                out.println("Entry " + count + "\nInput validation failed after " + rerunCount + " reruns. Exiting...");
-                allEntriesValid = false;
-                break;
-            }
-        }
-        if (allEntriesValid)
-            out.println("All entries are valid.");
+//
+//
+//        List<ValidationMethod> entries = new ArrayList<>();
+//        int maxReruns = 5;
+//        int baseSleepTime = 3000;
+//        int maxSleepTime = 40000;
+//        int countdownIncrease = 5000;
+//
+//        entries.add(new NameValidator());
+//        entries.add(new AddressValidator());
+//        entries.add(new MovieValidator());
+//        // Add more entries as needed
+//
+//        boolean allEntriesValid = true;
+//
+//        int count = 0;
+//        for (ValidationMethod vm : entries)
+//        {
+//            boolean validInput = false;
+//            int rerunCount = 0;
+//            int sleepTime = baseSleepTime;
+//
+//            while (!validInput && rerunCount < maxReruns)
+//            {
+//                validInput = entries.get(count).validate(); // Invoke the validate method
+//                rerunCount++;
+//
+//                if (!validInput)
+//                {
+//                    if (rerunCount > 0)
+//                    {
+//                        sleepTime += countdownIncrease;
+//                        if (sleepTime > maxSleepTime)
+//                        {
+//                            sleepTime = maxSleepTime;
+//                        }
+//                        out.println("Entry: " + count + "\nInput validation failed. Rerunning in");
+//                        countdownTimer(sleepTime / 1000);
+//                        out.print(" seconds...\n");
+//                    }
+//                }
+//                if (validInput)
+//                {
+//                    count++;
+//                    break;
+//                }
+//            }
+//
+//            if (!validInput) {
+//                out.println("Entry " + count + "\nInput validation failed after " + rerunCount + " reruns. Exiting...");
+//                allEntriesValid = false;
+//                break;
+//            }
+//        }
+//        if (allEntriesValid)
+//            out.println("All entries are valid.");
     }
 
     public interface ValidationMethod {

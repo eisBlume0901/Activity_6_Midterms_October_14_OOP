@@ -1,16 +1,15 @@
-package logic;
+package validator;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.util.*;
 import java.util.regex.*;
 public interface InputValidator
 {
 
-    default boolean isStringInputValid(String input)
+    default boolean isStringInputValid(String input) // set to private
     {
         String regex = "^(?!.*([aeiouAEIOU])\\1{2,}|.*[^a-zA-Z]+|.*[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ]{4}|.*[aeiouAEIOU]{3})[A-Za-z]*$";
         /* Not allowed:
@@ -65,6 +64,21 @@ public interface InputValidator
         return isValid;
     }
 
+    default boolean isPhraseValid(String input)
+    {
+        String[] tokens = input.split("\\s+");
+        boolean isValid = true;
+
+        for (String token : tokens)
+        {
+            if (!isStringInputValid(token))
+            {
+                isValid = false;
+                break;
+            }
+        }
+        return isValid;
+    }
 //    default boolean isDateValid(LocalDate localDate)
 //    {
 //
