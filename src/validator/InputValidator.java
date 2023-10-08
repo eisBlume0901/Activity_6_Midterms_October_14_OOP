@@ -3,7 +3,6 @@ package validator;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.*;
@@ -11,7 +10,6 @@ import java.util.stream.Collectors;
 
 public interface InputValidator
 {
-
     default boolean isStringInputValid(String input) // set to private
     {
         String regex = "^(?!.*([aeiouAEIOU])\\1{2,}|.*[^a-zA-Z]+|.*[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ]{4}|.*[aeiouAEIOU]{3})[A-Za-z]*$";
@@ -175,9 +173,8 @@ public interface InputValidator
                     List<String> mainCharacters = charactersMap.keySet().iterator().next();
                     List<String> supportingCharacters = charactersMap.values().iterator().next();
 
-                    // You can now work with mainCharacters and supportingCharacters as needed
-                    System.out.println("Main Characters: " + mainCharacters);
-                    System.out.println("Supporting Characters: " + supportingCharacters);
+//                    System.out.println("Main Characters: " + mainCharacters);
+//                    System.out.println("Supporting Characters: " + supportingCharacters);
 
                     return mainCharacters; // Return main characters as an example
                 })
@@ -197,9 +194,8 @@ public interface InputValidator
                     List<String> mainCharacters = charactersEntry.getKey();
                     List<String> supportingCharacters = charactersEntry.getValue();
 
-                    // You can now work with mainCharacters and supportingCharacters as needed
-                    System.out.println("Main Characters: " + mainCharacters);
-                    System.out.println("Supporting Characters: " + supportingCharacters);
+//                    System.out.println("Main Characters: " + mainCharacters);
+//                    System.out.println("Supporting Characters: " + supportingCharacters);
 
                     return supportingCharacters; // Return main characters as an example
                 }
@@ -207,5 +203,6 @@ public interface InputValidator
         }
         return Collections.emptyList(); // Return an empty list if the movie title is not found
     }
+
 
 }
