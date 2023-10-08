@@ -7,5 +7,6 @@ public class Test implements InputValidator, Searcher
         Test t =  new Test();
         System.out.println(t.isEnglishWord("Sophisticated"));
         System.out.println(t.searchRegion("Makati"));
+        System.out.println(t.searchIndustry("Information Technology"));
     }
 }

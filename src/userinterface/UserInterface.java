@@ -1,9 +1,12 @@
 package userinterface;
+import logic.InputValidator;
+import logic.Searcher;
+
 import java.util.*;
 
 import static java.lang.System.*;
 
-public class UserInterface
+public class UserInterface implements InputValidator, Searcher
 {
     private Scanner scanner;
     public void start()
