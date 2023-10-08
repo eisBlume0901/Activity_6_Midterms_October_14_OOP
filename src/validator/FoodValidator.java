@@ -1,6 +1,6 @@
 package validator;
 
-import domain.Food;
+import pojo.Food;
 
 import java.util.Scanner;
 

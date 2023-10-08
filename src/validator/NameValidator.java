@@ -1,6 +1,6 @@
 package validator;
 
-import domain.Name;
+import pojo.Name;
 
 import java.util.*;
 import static java.lang.System.*;

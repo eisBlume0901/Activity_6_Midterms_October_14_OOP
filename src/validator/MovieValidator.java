@@ -1,6 +1,6 @@
 package validator;
 
-import domain.Movie;
+import pojo.Movie;
 
 import java.util.Scanner;
 
