@@ -6,12 +6,12 @@ import java.nio.file.*;
 import java.util.HashSet;
 import java.util.*;
 
-public class WordValidator
+public class EnglishWordValidator
 {
     private File file;
     private Set englishWordSet;
 
-    public WordValidator()
+    public EnglishWordValidator()
     {
         this.file = new File("EnglishWords");
         this.englishWordSet = new HashSet();
@@ -41,7 +41,7 @@ public class WordValidator
 
     public static void main(String[] args)
     {
-        WordValidator wv = new WordValidator();
+        EnglishWordValidator wv = new EnglishWordValidator();
         wv.storeEnglishWordsToSet();
         System.out.println(wv.isEnglishWord("abcdefg"));
         System.out.println(wv.isEnglishWord("virgo"));
