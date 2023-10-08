@@ -23,6 +23,7 @@ public class UserInterface implements InputValidator, Searcher
         int baseSleepTime = 3000; // 15000 originally, 3000 is for testing purposes only
         int maxSleepTime = 40000;
         int entries = 3;
+        int countdownIncrease = 5000;
 
         boolean allEntriesValid = true;
 
@@ -30,23 +31,36 @@ public class UserInterface implements InputValidator, Searcher
         {
             boolean validInput = false;
             int rerunCount = 0;
+            int sleepTime = baseSleepTime;
 
             while (!validInput && rerunCount < maxReruns)
             {
                 if (rerunCount > 0)
                 {
-                    int sleepTime = Math.min(baseSleepTime + rerunCount * 5000, maxSleepTime);
+                    sleepTime += countdownIncrease;
+                    if (sleepTime > maxSleepTime)
+                    {
+                        sleepTime = maxSleepTime;
+                    }
                     out.println("Entry: " + entryCount + "\nInput validation failed. Rerunning in");
-                    countdownTimer(sleepTime / 10000);
-                    out.print(" seconds...");
+                    countdownTimer(sleepTime / 1000);
+                    out.print(" seconds...\n");
                 }
 
-                validInput = isNameValid() && isAddressValid();
+                validInput = validateInput(entryCount);
                 rerunCount++;
             }
 
-//            if (!validInput)
+            if (!validInput)
+            {
+                out.println("Entry " + entryCount + "\nInput validation failed after " + rerunCount + " reruns. Exiting...");
+                allEntriesValid = false;
+                break;
+            }
         }
+
+        if (allEntriesValid)
+            out.println("All entries are valid.");
     }
 
     private void countdownTimer(int seconds)
@@ -71,6 +85,14 @@ public class UserInterface implements InputValidator, Searcher
         }
     }
 
+    private boolean validateInput(int entryCount)
+    {
+        boolean nameIsValid = isNameValid();
+        boolean addressIsValid = isAddressValid();
+        boolean movieIsValid = isMovieValid();
+        boolean foodIsValid = isFoodValid();
+        return nameIsValid && addressIsValid && movieIsValid && foodIsValid;
+    }
     private boolean isNameValid()
     {
         out.println("First name: ");
