@@ -11,7 +11,8 @@ public class Test implements InputValidator, Searcher {
         out.println(t.isEnglishWord("Kate"));
         out.println(t.isPhraseValid("Mary Kate"));
         out.println(t.isSentenceValid("Mary Kate"));
-
+        out.println(t.isMovieYearValid(2000));
+        out.println(t.isMovieCharacter("Avatar", "Jake Sully"));
 //
 //
 //        List<ValidationMethod> entries = new ArrayList<>();
