@@ -7,7 +7,7 @@ public class ThreadRerunning {
         Scanner scanner = new Scanner(System.in);
 
         int maxReruns = 5;
-        int baseSleepTime = 20000; // Initial sleep time in milliseconds (20 seconds)
+        int baseSleepTime = 10000; // Initial sleep time in milliseconds (20 seconds)
         int maxSleepTime = 40000; // Maximum sleep time after 5 iterations (40 seconds)
 
         boolean validInput = false;

@@ -14,12 +14,61 @@ public class UserInterface implements InputValidator, Searcher
     }
     public void start()
     {
-
+        inputValidation();
     }
 
     private void inputValidation()
     {
+        int maxReruns = 5;
+        int baseSleepTime = 3000; // 15000 originally, 3000 is for testing purposes only
+        int maxSleepTime = 40000;
+        int entries = 3;
 
+        boolean allEntriesValid = true;
+
+        for (int entryCount = 1; entryCount <= entries; entryCount++)
+        {
+            boolean validInput = false;
+            int rerunCount = 0;
+
+            while (!validInput && rerunCount < maxReruns)
+            {
+                if (rerunCount > 0)
+                {
+                    int sleepTime = Math.min(baseSleepTime + rerunCount * 5000, maxSleepTime);
+                    out.println("Entry: " + entryCount + "\nInput validation failed. Rerunning in");
+                    countdownTimer(sleepTime / 10000);
+                    out.print(" seconds...");
+                }
+
+                validInput = isNameValid() && isAddressValid();
+                rerunCount++;
+            }
+
+//            if (!validInput)
+        }
+    }
+
+    private void countdownTimer(int seconds)
+    {
+        for (int i = seconds; i >= 1; i--)
+        {
+            out.print(i + " ");
+            sleep(1000);
+        }
+        out.println();
+    }
+
+    private void sleep(int milliseconds)
+    {
+        try
+        {
+            Thread.sleep(milliseconds);
+        }
+        catch (InterruptedException ie)
+        {
+            ie.printStackTrace();
+        }
     }
 
     private boolean isNameValid()

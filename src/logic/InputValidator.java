@@ -65,8 +65,8 @@ public interface InputValidator
         return isValid;
     }
 
-    default boolean isDateValid(LocalDate localDate)
-    {
-
-    }
+//    default boolean isDateValid(LocalDate localDate)
+//    {
+//
+//    }
 }
