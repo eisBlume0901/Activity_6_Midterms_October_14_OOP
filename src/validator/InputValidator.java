@@ -129,18 +129,21 @@ public interface InputValidator
     }
 
 
-    default boolean isMainCharacter()
+    default boolean isMainCharacter(String movie, String movieCharacter)
     {
-
+        List<String> mainCharacters = getCharactersForMovie(movie);
+        if (mainCharacters.contains(movieCharacter))
+        {
+            return true;
+        }
         return false;
     }
 
-    default boolean isSupportingCharacter()
+    default boolean isSupportingCharacter(String movie, String movieCharacter)
     {
-        return false;
-    }
-    default boolean isMovieYearValid(int year) {
-        if (year >= 2000 && year <= 2023) {
+        List<String> supportingCharacters = getSupportingCharacters(movie);
+        if (supportingCharacters.contains(movieCharacter))
+        {
             return true;
         }
         return false;
