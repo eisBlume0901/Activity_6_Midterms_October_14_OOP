@@ -26,6 +26,8 @@ public class MovieValidator implements ValidationMethod, InputValidator
             movie = new Movie();
             movie.setMovieTitle(movieName);
             movie.setMovieCharacter(movieCharacter);
+
+            // For debugging, have to remove
             out.println(movie.getMovieTitle() + " " + movie.getMovieCharacter());
             return true;
         }

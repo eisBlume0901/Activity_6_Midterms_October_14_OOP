@@ -6,13 +6,12 @@ public class Test implements InputValidator, Searcher {
     static Scanner scanner = new Scanner(System.in);
     static Test t = new Test();
     public static void main(String[] args) {
-
-        out.println(t.isEnglishWord("Mary"));
-        out.println(t.isEnglishWord("Kate"));
-        out.println(t.isPhraseValid("Mary Kate"));
-        out.println(t.isSentenceValid("Mary Kate"));
-        out.println(t.isMovieCharacter("Avatar", "Jake Sully"));
-        out.println(t.isMainCharacter("Avatar", "Jake Sully"));
+        out.println(t.storeMoviesToMap());
+//        out.println(t.isStringInputValid("179-L"));
+//        out.println(t.isEnglishWord("Mary"));
+//        out.println(t.isEnglishWord("Kate"));
+//        out.println(t.isPhraseValid("Mary Kate"));
+//        out.println(t.isSentenceValid("Mary Kate"));
 //
 //
 //        List<ValidationMethod> entries = new ArrayList<>();
@@ -21,7 +20,7 @@ public class Test implements InputValidator, Searcher {
 //        int maxSleepTime = 40000;
 //        int countdownIncrease = 5000;
 //
-//        entries.add(new NameValidator());
+//        entries.add(new Namealidator());
 //        entries.add(new AddressValidator());
 //        entries.add(new MovieValidator());
 //        // Add more entries as needed

@@ -18,6 +18,7 @@ public class AddressValidator implements ValidationMethod, InputValidator, Searc
         // East Rembo is a unique word
         if (isPhraseValid(barangayName) && cityExists(cityName))
         {
+            // For debugging have to remove
             out.println("Address valid!");
             return true;
         }

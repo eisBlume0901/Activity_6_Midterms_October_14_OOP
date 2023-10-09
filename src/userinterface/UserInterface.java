@@ -28,7 +28,7 @@ public class UserInterface implements InputValidator, Searcher
     {
         List<ValidationMethod> entries = new ArrayList<>();
         int maxReruns = 5;
-        int baseSleepTime = 3000;
+        int baseSleepTime = 15000;
         int maxSleepTime = 40000;
         int countdownIncrease = 5000;
 
@@ -36,7 +36,7 @@ public class UserInterface implements InputValidator, Searcher
         entries.add(new AddressValidator());
         entries.add(new MovieValidator());
         entries.add(new FoodValidator());
-//        entries.add(new BirthDateAndPlaceValidator());
+        entries.add(new BirthDateAndPlaceValidator());
 
         boolean allEntriesValid = true;
 

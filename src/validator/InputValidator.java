@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
 import java.util.*;
 import java.util.regex.*;
 import java.util.stream.Collectors;
@@ -81,10 +84,9 @@ public interface InputValidator
         return isValid;
     }
 
-    private Map storeMoviesToMap()
-    {
+    default Map<String, Map<List<String>, Map<List<String>, List<String>>>> storeMoviesToMap() {
         File movieFile = new File("Movies");
-        Map<String, Map<String, Map<List<String>, List<String>>>> movieMap = new HashMap<>();
+        Map<String, Map<List<String>, Map<List<String>, List<String>>>> movieMap = new HashMap<>();
 
         try {
             Files.lines(Paths.get(movieFile.getAbsolutePath()))
@@ -92,25 +94,28 @@ public interface InputValidator
                     .forEach(parts -> {
                         String year = parts[0].trim();
                         String title = parts[1].trim();
-                        String genre = parts[2].trim();
 
+                        List<String> genres = extractGenres(parts[2], "Genre:"); // Updated method name
                         List<String> mainCharacters = extractCharacters(parts[3], "Main Characters:");
                         List<String> supportingCharacters = extractCharacters(parts[4], "Supporting Characters:");
 
                         Map<List<String>, List<String>> charactersMap = new HashMap<>();
                         charactersMap.put(mainCharacters, supportingCharacters);
 
-                        Map<String, Map<List<String>, List<String>>> genreCharacterMap = new HashMap<>();
-                        genreCharacterMap.put(genre, charactersMap);
+                        Map<List<String>, Map<List<String>, List<String>>> genreCharacterMap = new HashMap<>();
+                        genreCharacterMap.put(genres, charactersMap);
 
-                        movieMap.put(title, genreCharacterMap);
+                        movieMap.put(title + " " + year, genreCharacterMap);
+
                     });
+
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         return movieMap;
     }
 
+    // Use this as inspiration for extractGenres
     private List<String> extractCharacters(String charactersString, String label)
     {
         return Optional.of(charactersString)
@@ -126,6 +131,16 @@ public interface InputValidator
                 .orElse(Collections.emptyList());
     }
 
+    private List<String> extractGenres(String genresString, String label) {
+        return Optional.of(genresString)
+                .filter(s -> s.contains(label))
+                .map(s -> s.split(label))
+                .filter(parts -> parts.length > 1)
+                .map(parts -> Arrays.stream(parts[1].split(";"))
+                        .map(String::trim)
+                        .collect(Collectors.toList()))
+                .orElse(Collections.emptyList());
+    }
 
     default boolean isMainCharacter(String movie, String movieCharacter)
     {
@@ -162,13 +177,14 @@ public interface InputValidator
         allCharacters.addAll(supportingCharacters);
         return allCharacters;
     }
+
     private List<String> getCharactersForMovie(String movieTitle) {
-        Map<String, Map<String, Map<List<String>, List<String>>>> movieMap = storeMoviesToMap();
+        Map<String, Map<List<String>, Map<List<String>, List<String>>>> movieMap = storeMoviesToMap();
 
         return movieMap.entrySet().stream()
                 .filter(entry -> entry.getKey().equals(movieTitle))
                 .findFirst()
-                .map(entry -> {
+                .map(entry -> { // updating iteration since it is a list
                     Map<List<String>, List<String>> charactersMap = entry.getValue().values().iterator().next();
                     List<String> mainCharacters = charactersMap.keySet().iterator().next();
                     List<String> supportingCharacters = charactersMap.values().iterator().next();
@@ -181,14 +197,12 @@ public interface InputValidator
                 .orElse(Collections.emptyList()); // Return an empty list if the movie title is not found
     }
 
-
-
     private List<String> getSupportingCharacters(String movieTitle) {
-        Map<String, Map<String, Map<List<String>, List<String>>>> movieMap = storeMoviesToMap();
-        Map<String, Map<List<String>, List<String>>> genreCharacterMap = movieMap.get(movieTitle);
+        Map<String, Map<List<String>, Map<List<String>, List<String>>>> movieMap = storeMoviesToMap();
+        Map<List<String>, Map<List<String>, List<String>>> genreCharacterMap = movieMap.get(movieTitle);
 
         if (genreCharacterMap != null) {
-            for (Map.Entry<String, Map<List<String>, List<String>>> entry : genreCharacterMap.entrySet()) {
+            for (Map.Entry<List<String>, Map<List<String>, List<String>>> entry : genreCharacterMap.entrySet()) { // updating iteration since it is a list
                 Map<List<String>, List<String>> charactersMap = entry.getValue();
                 for (Map.Entry<List<String>, List<String>> charactersEntry : charactersMap.entrySet()) {
                     List<String> mainCharacters = charactersEntry.getKey();
@@ -204,5 +218,64 @@ public interface InputValidator
         return Collections.emptyList(); // Return an empty list if the movie title is not found
     }
 
+    default boolean isMonthDayValid(String monthName, int day)
+    {
+        Map<String, Integer> maxDaysMap = new HashMap<>();
+        maxDaysMap.put("January", 31);
+        maxDaysMap.put("February", 28); // Adjust for leap years
+        maxDaysMap.put("March", 31);
+        maxDaysMap.put("April", 30);
+        maxDaysMap.put("May", 31);
+        maxDaysMap.put("June", 30);
+        maxDaysMap.put("July", 31);
+        maxDaysMap.put("August", 31);
+        maxDaysMap.put("September", 30);
+        maxDaysMap.put("October", 31);
+        maxDaysMap.put("November", 30);
+        maxDaysMap.put("December", 31);
 
+        if (maxDaysMap.containsKey(monthName))
+        {
+            int maxDays = maxDaysMap.get(monthName);
+            if (isValidDay(day, maxDays)) {
+                System.out.println("Valid date");
+                return true;
+            }
+            else
+            {
+                System.out.println("Invalid day for " + monthName);
+            }
+        }
+        else
+        {
+            System.out.println("Invalid month name");
+        }
+        return false;
+    }
+
+    private boolean isValidDay(int day, int maxDays)
+    {
+        return day >= 1 && day <= maxDays;
+    }
+    default Month getMonthNumber(String monthName)
+    {
+        Month month = Month.valueOf(monthName.toUpperCase());
+        return month;
+    }
+
+    default boolean isYearValid(int year)
+    {
+        int minYear = 1900;
+        int maxYear = LocalDate.now().getYear();
+
+        if (year >= minYear && year <= maxYear)
+            return true;
+        return false;
+    }
+    default int calculateAge(LocalDate birthdate)
+    {
+        LocalDate currentDate = LocalDate.now();
+        Period period = Period.between(birthdate, currentDate);
+        return period.getYears();
+    }
 }
