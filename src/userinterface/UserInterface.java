@@ -1,4 +1,5 @@
 package userinterface;
+import pojo.Person;
 import validator.*;
 
 import java.util.*;
@@ -7,6 +8,7 @@ import static java.lang.System.*;
 public class UserInterface implements InputValidator, Searcher
 {
     private Scanner scanner;
+    private Person person;
 
     public UserInterface()
     {
@@ -24,19 +26,25 @@ public class UserInterface implements InputValidator, Searcher
         }
     }
 
+    private List<ValidationMethod> storeValidators()
+    {
+        List<ValidationMethod> validators = new ArrayList<>();
+        validators.add(new NameValidator());
+        validators.add(new AddressValidator());
+        validators.add(new CourseValidator());
+        validators.add(new MovieValidator());
+        validators.add(new FoodValidator());
+        validators.add(new BirthDateAndPlaceValidator());
+
+        return validators;
+    }
     private boolean validateEntries()
     {
-        List<ValidationMethod> entries = new ArrayList<>();
+        List<ValidationMethod> entries = storeValidators();
         int maxReruns = 5;
         int baseSleepTime = 15000;
         int maxSleepTime = 40000;
         int countdownIncrease = 5000;
-
-        entries.add(new NameValidator());
-        entries.add(new AddressValidator());
-        entries.add(new MovieValidator());
-        entries.add(new FoodValidator());
-        entries.add(new BirthDateAndPlaceValidator());
 
         boolean allEntriesValid = true;
 
@@ -106,4 +114,16 @@ public class UserInterface implements InputValidator, Searcher
         }
     }
 
+    // For debugging
+    private void displayResults()
+    {
+        person = new Person();
+        out.println("Name: " + person.getName().toString());
+        out.println("Address: " +
+                person.getAddress().getBarangay() + ", " +
+                person.getAddress().getCity() + ", " +
+                searchRegion(person.getAddress().getCity()));
+        out.println("Course: " + person.getCourse() + ", " + searchIndustry(person.getCourse().getCourseName()));
+
+    }
 }

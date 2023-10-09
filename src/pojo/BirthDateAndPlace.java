@@ -42,4 +42,9 @@ public class BirthDateAndPlace
     public void setBirthPlace(String birthPlace) {
         this.birthPlace = birthPlace;
     }
+
+    @Override
+    public String toString() {
+        return birthMonth + " " + birthDay + ", " + birthYear;
+    }
 }
