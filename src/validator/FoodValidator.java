@@ -15,7 +15,7 @@ public class FoodValidator implements ValidationMethod, InputValidator
     @Override
     public boolean validate() {
         // Favorites sector
-        out.println("Food: ");
+        out.println("Favorite Food: ");
         String foodName = scanner.nextLine();
 
         if (isSentenceValid(foodName))

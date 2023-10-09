@@ -6,13 +6,16 @@ public class Person
     private Address address;
     private Course course;
     private Movie movie;
-
     private Food food;
 
+    private UserNumber userNumber;
     private BirthDateAndPlace birthDatePlace;
 
     public Name getName() {
         return name;
+    }
+    public BirthDateAndPlace getBirthDatePlace() {
+        return birthDatePlace;
     }
 
     public Address getAddress() {
@@ -31,7 +34,10 @@ public class Person
         return food;
     }
 
-    public BirthDateAndPlace getBirthDatePlace() {
-        return birthDatePlace;
+    public UserNumber getUserNumber() {
+        return userNumber;
     }
+
+
+
 }

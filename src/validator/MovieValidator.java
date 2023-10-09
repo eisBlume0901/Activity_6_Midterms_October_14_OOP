@@ -15,9 +15,9 @@ public class MovieValidator implements ValidationMethod, InputValidator
     @Override
     public boolean validate() {
         // Favorites sector
-        out.println("Movie title: ");
+        out.println("Favorite Movie title: ");
         String movieName = scanner.nextLine();
-        out.println("Movie character: ");
+        out.println("Favorite Movie character: ");
         String movieCharacter = scanner.nextLine();
 
         // Add a database of movies

@@ -2,6 +2,7 @@ package userinterface;
 import pojo.Person;
 import validator.*;
 
+import java.time.LocalDate;
 import java.util.*;
 import static java.lang.System.*;
 
@@ -30,11 +31,12 @@ public class UserInterface implements InputValidator, Searcher
     {
         List<ValidationMethod> validators = new ArrayList<>();
         validators.add(new NameValidator());
+        validators.add(new BirthDateAndPlaceValidator());
         validators.add(new AddressValidator());
         validators.add(new CourseValidator());
         validators.add(new MovieValidator());
         validators.add(new FoodValidator());
-        validators.add(new BirthDateAndPlaceValidator());
+        validators.add(new NumberValidator());
 
         return validators;
     }
@@ -118,12 +120,34 @@ public class UserInterface implements InputValidator, Searcher
     private void displayResults()
     {
         person = new Person();
-        out.println("Name: " + person.getName().toString());
+        out.println("Personal Information ");
+        out.println("Name: " + person.getName().toString()); // String
+        out.println("BirthDate: " + person.getBirthDatePlace().toString()); // String
+        out.println("Age: " + calculateAge(LocalDate.of(
+                person.getBirthDatePlace().getBirthYear(),
+                person.getBirthDatePlace().getBirthMonth(),
+                person.getBirthDatePlace().getBirthDay()))); // Integer
         out.println("Address: " +
                 person.getAddress().getBarangay() + ", " +
                 person.getAddress().getCity() + ", " +
-                searchRegion(person.getAddress().getCity()));
-        out.println("Course: " + person.getCourse() + ", " + searchIndustry(person.getCourse().getCourseName()));
+                searchRegion(person.getAddress().getCity())); // String
+        out.println("Course: " + person.getCourse() + ", " + searchIndustry(person.getCourse().getCourseName())); // String
 
+        out.println("Favorites ");
+        out.println("Movie: " + person.getMovie().getMovieTitle()); // String
+        out.println("Movie Character: " +  person.getMovie().getMovieCharacter()); // String
+        out.println("Main Character: " +
+                isMainCharacter(person.getMovie().getMovieTitle(), person.getMovie().getMovieCharacter())); // String
+        out.println("Food: " + person.getFood().getFoodName()); // String
+        out.println("Number: " + person.getUserNumber().getFavoriteNumber());
+
+        out.println("Preferred Number of Children: ");
+        out.println("Number: " + person.getUserNumber().getPreferredNumberOfChildren());
+        /*
+        I MAY OVERSEE OTHER REUQIREMENTS SO PLEASE DOUBLE CHECK
+        zodiac
+        binary, octal, hexadecimal
+
+         */
     }
 }
