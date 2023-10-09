@@ -145,9 +145,16 @@ public class UserInterface implements InputValidator, Searcher
         out.println("Number: " + person.getUserNumber().getPreferredNumberOfChildren());
         /*
         I MAY OVERSEE OTHER REUQIREMENTS SO PLEASE DOUBLE CHECK
-        zodiac
-        binary, octal, hexadecimal
-
+        HAVE A METHOD ALREADY 1. What is the reign of the user's address? (e.g. Cavite -> Region IV-A)
+        HAVE A METHOD ALREADY 2. What classification of the user's course? (e.g. IT -> Technology)
+        3. How many consonants and vowels in the user's full name?
+        4. How many words in the user's full name?
+        5. Check if the user's age is Senior, Mid, Teenager, Child or Baby
+        6. Check what is the zodiac sign of the user
+        HAVE A METHOD ALREADY 7. Identify if the user's fav. movie is action, comedy, or thriller
+        HAVE A METHOD ALREADY 8. Identify if the user's fav. movie character is the main character or supporting character.
+        9. Get the binary, octal & hexadecimal value of the user's  fav. number
+        10. Provide user's own psychological feedback based on the preferred number of children by the user.
          */
     }
 }
