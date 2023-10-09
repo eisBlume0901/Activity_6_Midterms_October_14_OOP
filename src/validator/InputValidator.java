@@ -84,7 +84,7 @@ public interface InputValidator
         return isValid;
     }
 
-    default Map<String, Map<List<String>, Map<List<String>, List<String>>>> storeMoviesToMap() {
+    private Map<String, Map<List<String>, Map<List<String>, List<String>>>> storeMoviesToMap() {
         File movieFile = new File("Movies");
         Map<String, Map<List<String>, Map<List<String>, List<String>>>> movieMap = new HashMap<>();
 
@@ -178,44 +178,34 @@ public interface InputValidator
         return allCharacters;
     }
 
-    private List<String> getCharactersForMovie(String movieTitle) {
+    default List<String> getCharactersForMovie(String movieTitle) {
+        // NOTICE THE HASHMAP it should be compatible with the map -> entry
         Map<String, Map<List<String>, Map<List<String>, List<String>>>> movieMap = storeMoviesToMap();
 
         return movieMap.entrySet().stream()
-                .filter(entry -> entry.getKey().equals(movieTitle))
+                .filter(entry -> entry.getKey().contains(movieTitle))
                 .findFirst()
-                .map(entry -> { // updating iteration since it is a list
+                .map(entry -> {
                     Map<List<String>, List<String>> charactersMap = entry.getValue().values().iterator().next();
-                    List<String> mainCharacters = charactersMap.keySet().iterator().next();
-                    List<String> supportingCharacters = charactersMap.values().iterator().next();
-
-//                    System.out.println("Main Characters: " + mainCharacters);
-//                    System.out.println("Supporting Characters: " + supportingCharacters);
-
+                    List<String> mainCharacters = new ArrayList<>(charactersMap.keySet().iterator().next());
                     return mainCharacters; // Return main characters as an example
                 })
                 .orElse(Collections.emptyList()); // Return an empty list if the movie title is not found
     }
 
-    private List<String> getSupportingCharacters(String movieTitle) {
+    default List<String> getSupportingCharacters(String movieTitle) {
+        // NOTICE THE HASHMAP it should be compatible with the map -> entry
         Map<String, Map<List<String>, Map<List<String>, List<String>>>> movieMap = storeMoviesToMap();
-        Map<List<String>, Map<List<String>, List<String>>> genreCharacterMap = movieMap.get(movieTitle);
 
-        if (genreCharacterMap != null) {
-            for (Map.Entry<List<String>, Map<List<String>, List<String>>> entry : genreCharacterMap.entrySet()) { // updating iteration since it is a list
-                Map<List<String>, List<String>> charactersMap = entry.getValue();
-                for (Map.Entry<List<String>, List<String>> charactersEntry : charactersMap.entrySet()) {
-                    List<String> mainCharacters = charactersEntry.getKey();
-                    List<String> supportingCharacters = charactersEntry.getValue();
-
-//                    System.out.println("Main Characters: " + mainCharacters);
-//                    System.out.println("Supporting Characters: " + supportingCharacters);
-
-                    return supportingCharacters; // Return main characters as an example
-                }
-            }
-        }
-        return Collections.emptyList(); // Return an empty list if the movie title is not found
+        return movieMap.entrySet().stream()
+                .filter(entry -> entry.getKey().contains(movieTitle))
+                .findFirst()
+                .map(entry -> {
+                    Map<List<String>, List<String>> charactersMap = entry.getValue().values().iterator().next();
+                    List<String> mainCharacters = new ArrayList<>(charactersMap.values().iterator().next());
+                    return mainCharacters; // Return main characters as an example
+                })
+                .orElse(Collections.emptyList()); // Return an empty list if the movie title is not found
     }
 
     default boolean isMonthDayValid(String monthName, int day)

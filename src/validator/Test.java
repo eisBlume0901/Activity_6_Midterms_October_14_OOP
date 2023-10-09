@@ -6,7 +6,9 @@ public class Test implements InputValidator, Searcher {
     static Scanner scanner = new Scanner(System.in);
     static Test t = new Test();
     public static void main(String[] args) {
-        out.println(t.storeMoviesToMap());
+        out.println(t.isMainCharacter("Batman Begins", "Alfred"));
+        out.println(t.getCharactersForMovie("Batman Begins"));
+        out.println(t.getSupportingCharacters("Batman Begins"));
 //        out.println(t.isStringInputValid("179-L"));
 //        out.println(t.isEnglishWord("Mary"));
 //        out.println(t.isEnglishWord("Kate"));
