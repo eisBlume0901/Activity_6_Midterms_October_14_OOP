@@ -18,7 +18,7 @@ public class UserInterface implements InputValidator, Searcher
     {
         if (validateEntries())
         {
-            out.println("All done");
+            displayResults();
         }
         else
         {

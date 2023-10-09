@@ -56,6 +56,11 @@ public interface Searcher
     default String searchIndustry(String input)
     {
         Map<String, String> courseIndustryMap = storeCoursesIndustriesToMap();
-        return courseIndustryMap.get(input).toString();
+        if (courseIndustryMap.containsKey(input))
+        {
+            return courseIndustryMap.get(input);
+        }
+        return "Course not found";
     }
+
 }

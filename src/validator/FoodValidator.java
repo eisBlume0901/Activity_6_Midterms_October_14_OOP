@@ -22,7 +22,6 @@ public class FoodValidator implements ValidationMethod, InputValidator
         {
             food = new Food();
             food.setFoodName(foodName);
-            out.println(food.getFoodName());
             return true;
         }
         return false;

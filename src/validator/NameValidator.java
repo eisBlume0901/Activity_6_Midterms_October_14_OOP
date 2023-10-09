@@ -27,9 +27,6 @@ public class NameValidator implements ValidationMethod, InputValidator
             name.setFirstName(firstName);
             name.setMiddleName(middleName);
             name.setLastName(lastName);
-
-            // For debugging have to remove
-            out.println(name);
             return true;
         }
         return false;

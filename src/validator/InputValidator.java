@@ -178,7 +178,7 @@ public interface InputValidator
         return allCharacters;
     }
 
-    default List<String> getCharactersForMovie(String movieTitle) {
+    private List<String> getCharactersForMovie(String movieTitle) {
         // NOTICE THE HASHMAP it should be compatible with the map -> entry
         Map<String, Map<List<String>, Map<List<String>, List<String>>>> movieMap = storeMoviesToMap();
 
@@ -193,7 +193,7 @@ public interface InputValidator
                 .orElse(Collections.emptyList()); // Return an empty list if the movie title is not found
     }
 
-    default List<String> getSupportingCharacters(String movieTitle) {
+    private List<String> getSupportingCharacters(String movieTitle) {
         // NOTICE THE HASHMAP it should be compatible with the map -> entry
         Map<String, Map<List<String>, Map<List<String>, List<String>>>> movieMap = storeMoviesToMap();
 
@@ -208,6 +208,20 @@ public interface InputValidator
                 .orElse(Collections.emptyList()); // Return an empty list if the movie title is not found
     }
 
+    default List<String> getGenre(String movieTitle) {
+        // NOTICE THE HASHMAP it should be compatible with the map -> entry
+        Map<String, Map<List<String>, Map<List<String>, List<String>>>> movieMap = storeMoviesToMap();
+
+        return movieMap.entrySet().stream()
+                .filter(entry -> entry.getKey().contains(movieTitle))
+                .findFirst()
+                .map(entry -> {
+                    Map<List<String>, Map<List<String>, List<String>>> genreCharacterMap = entry.getValue();
+                    List<String> genres = new ArrayList<>(entry.getValue().keySet().iterator().next());
+                    return genres; // Return main characters as an example
+                })
+                .orElse(Collections.emptyList()); // Return an empty list if the movie title is not found
+    }
     default boolean isMonthDayValid(String monthName, int day)
     {
         Map<String, Integer> maxDaysMap = new HashMap<>();
