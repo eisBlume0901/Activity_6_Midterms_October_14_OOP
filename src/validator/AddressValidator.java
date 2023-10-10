@@ -10,7 +10,7 @@ public class AddressValidator implements ValidationMethod, InputValidator, Searc
     private Scanner scanner = new Scanner(in);
     private Address address;
     public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
 
     public Address getAddress() {
         return address;
@@ -23,7 +23,7 @@ public class AddressValidator implements ValidationMethod, InputValidator, Searc
     @Override
     public boolean validate()
     {
-        out.println(ANSI_GREEN + "Barangay: ");
+        out.println(ANSI_YELLOW + "Barangay: ");
         String barangayName = scanner.nextLine();
         out.println("City: " + ANSI_RESET);
         String cityName = scanner.nextLine();

@@ -12,7 +12,10 @@ public class NumberValidator implements ValidationMethod
     private Scanner scanner = new Scanner(in);
     private UserNumber userNumber;
     public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+
+
 
     public UserNumber getUserNumber() {
         return userNumber;
@@ -25,9 +28,9 @@ public class NumberValidator implements ValidationMethod
     @Override
     public boolean validate() {
 
-        out.println(ANSI_CYAN + "Number: ");
+        out.println(ANSI_BLUE + "Number: " + ANSI_RESET);
         int favoriteNumber = Integer.parseInt(scanner.nextLine());
-        out.println("\nPreferred Number of Children: " + ANSI_RESET);
+        out.println(ANSI_PURPLE + "\nPreferred Number of Children: " + ANSI_RESET);
         int preferredNumber = Integer.parseInt(scanner.nextLine());
 
         if (preferredNumber >= 0)

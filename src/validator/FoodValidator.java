@@ -13,7 +13,7 @@ public class FoodValidator implements ValidationMethod, InputValidator
     private Food food;
     private Scanner scanner = new Scanner(in);
     public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_BLUE = "\u001B[34m";
 
     public Food getFood() {
         return food;
@@ -25,7 +25,7 @@ public class FoodValidator implements ValidationMethod, InputValidator
 
     @Override
     public boolean validate() {
-        out.println(ANSI_PURPLE + "Food: " + ANSI_RESET);
+        out.println(ANSI_BLUE + "Food: " + ANSI_RESET);
         String foodName = scanner.nextLine();
 
         if (isSentenceValid(foodName))

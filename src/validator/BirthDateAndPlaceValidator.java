@@ -10,7 +10,7 @@ public class BirthDateAndPlaceValidator implements ValidationMethod, InputValida
     private Scanner scanner = new Scanner(in);
     private BirthDateAndPlace birthDateAndPlace;
     public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_YELLOW = "\u001B[31m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
 
     public BirthDateAndPlace getBirthDateAndPlace() {
         return birthDateAndPlace;

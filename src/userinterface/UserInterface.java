@@ -113,9 +113,8 @@ public class UserInterface implements InputValidator, Searcher
                         {
                             sleepTime = maxSleepTime;
                         }
-                        out.println("Input validation failed. Rerunning in ");
+                        err.println("Input validation failed. Rerunning in ...");
                         countdownTimer(sleepTime / 1000);
-                        out.print(" seconds...\n");
                     }
                 }
                 if (validInput)
@@ -126,13 +125,11 @@ public class UserInterface implements InputValidator, Searcher
             }
 
             if (!validInput) {
-                out.println("Input validation failed after " + rerunCount + " reruns. Exiting...");
+                err.println("Input validation failed after " + rerunCount + " reruns. Exiting...");
                 allEntriesValid = false;
                 break;
             }
         }
-        if (allEntriesValid)
-            out.println("All entries are valid.");
         return allEntriesValid;
     }
 
@@ -142,6 +139,11 @@ public class UserInterface implements InputValidator, Searcher
         {
             out.print(i + " ");
             sleep(1000);
+
+            if (i == 1)
+            {
+                out.print("seconds");
+            }
         }
         out.println();
     }

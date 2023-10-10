@@ -12,6 +12,9 @@ public class CourseValidator implements ValidationMethod, InputValidator, Search
     private Course course;
     private Scanner scanner = new Scanner(in);
 
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RESET = "\u001B[0m";
+
     public Course getCourse() {
         return course;
     }
@@ -22,7 +25,7 @@ public class CourseValidator implements ValidationMethod, InputValidator, Search
 
     @Override
     public boolean validate() {
-        System.out.println("Course: ");
+        System.out.println(ANSI_GREEN + "Course: " + ANSI_RESET);
         String courseName = scanner.nextLine();
 
         if (isSentenceValid(courseName))
