@@ -1,7 +1,6 @@
-package validator;
+package logic.validator;
 
 import pojo.Course;
-import pojo.Person;
 
 import java.util.*;
 import static java.lang.System.*;

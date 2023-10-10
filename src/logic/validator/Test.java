@@ -1,4 +1,8 @@
-package validator;
+package logic.validator;
+import logic.reportGenerator.UserInfoAnalyzer;
+
+import java.time.Month;
+import java.time.MonthDay;
 import java.util.*;
 import static java.lang.System.*;
 
@@ -7,6 +11,12 @@ public class Test implements InputValidator, Searcher {
     static Test t = new Test();
     public static void main(String[] args) {
 
+        UserInfoAnalyzer uia = new UserInfoAnalyzer();
+
+        uia.providePsychologicalFeedback(new StringBuilder(), 0);
+        Month month = Month.valueOf("September".toUpperCase());
+        MonthDay monthDay = MonthDay.of(month, 9);
+        out.println(uia.findZodiacSign(monthDay));
 
 //        String martha = "martha";
 //        out.println(martha.substring(0,1).toUpperCase() + martha.substring(1).toLowerCase());
@@ -142,7 +152,7 @@ public class Test implements InputValidator, Searcher {
         }
     }
 
-    // Add more validator classes as needed
+    // Add more logic.validator classes as needed
 
     private static void countdownTimer(int seconds) {
         for (int i = seconds; i >= 1; i--) {

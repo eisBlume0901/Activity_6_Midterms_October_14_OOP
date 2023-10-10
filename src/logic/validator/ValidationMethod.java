@@ -1,4 +1,4 @@
-package validator;
+package logic.validator;
 
 public interface ValidationMethod
 {

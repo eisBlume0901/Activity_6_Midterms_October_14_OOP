@@ -31,7 +31,7 @@ public class MultipleEntriesValidation1 {
                 System.out.print("Enter your " + entryType + ": ");
                 String userInput = scanner.nextLine();
 
-                // Use the appropriate validator for the current entry type
+                // Use the appropriate logic.validator for the current entry type
                 validInput = validators.get(entryType).validate(userInput);
 
                 rerunCount++;
@@ -50,7 +50,7 @@ public class MultipleEntriesValidation1 {
         scanner.close();
     }
 
-    // Define validator interfaces
+    // Define logic.validator interfaces
     interface Validator {
         boolean validate(String input);
     }

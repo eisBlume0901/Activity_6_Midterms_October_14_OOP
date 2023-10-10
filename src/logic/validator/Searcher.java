@@ -1,4 +1,4 @@
-package validator;
+package logic.validator;
 
 import java.io.IOException;
 import java.nio.file.Files;

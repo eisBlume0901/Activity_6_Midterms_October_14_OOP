@@ -1,4 +1,4 @@
-package validator;
+package logic.validator;
 
 import java.io.File;
 import java.io.IOException;
@@ -115,16 +115,12 @@ public interface InputValidator
         return movieMap;
     }
 
-    // Use this as inspiration for extractGenres
     private List<String> extractCharacters(String charactersString, String label)
     {
         return Optional.of(charactersString)
-                // Check if the label is present in the string
                 .filter(s -> s.contains(label))
-                // Split the string based on the label and get the second part
                 .map(s -> s.split(label))
                 .filter(parts -> parts.length > 1)
-                // Split the second part by semicolons and trim the values
                 .map(parts -> {
                     return Arrays.stream(parts[1].split(";"))
                             .map(s -> s.trim())
@@ -165,14 +161,9 @@ public interface InputValidator
     default boolean isMovieCharacter(String movie, String movieCharacter)
     {
         List<String> characterList = allCharactersFromAMovie(movie);
-
         for (String character : characterList)
-        {
             if (character.equalsIgnoreCase(movieCharacter))
-            {
                 return true;
-            }
-        }
         return false;
     }
 
@@ -194,9 +185,9 @@ public interface InputValidator
                 .map(entry -> {
                     Map<List<String>, List<String>> charactersMap = entry.getValue().values().iterator().next();
                     List<String> mainCharacters = new ArrayList<>(charactersMap.keySet().iterator().next());
-                    return mainCharacters; // Return main characters as an example
+                    return mainCharacters;
                 })
-                .orElse(Collections.emptyList()); // Return an empty list if the movie title is not found
+                .orElse(Collections.emptyList());
     }
 
     default List<String> getSupportingCharacters(String movieTitle) {
@@ -208,9 +199,9 @@ public interface InputValidator
                 .map(entry -> {
                     Map<List<String>, List<String>> charactersMap = entry.getValue().values().iterator().next();
                     List<String> mainCharacters = new ArrayList<>(charactersMap.values().iterator().next());
-                    return mainCharacters; // Return main characters as an example
+                    return mainCharacters;
                 })
-                .orElse(Collections.emptyList()); // Return an empty list if the movie title is not found
+                .orElse(Collections.emptyList());
     }
 
     default List<String> getGenre(String movieTitle) {
@@ -222,9 +213,9 @@ public interface InputValidator
                 .map(entry -> {
                     Map<List<String>, Map<List<String>, List<String>>> genreCharacterMap = entry.getValue();
                     List<String> genres = new ArrayList<>(entry.getValue().keySet().iterator().next());
-                    return genres; // Return main characters as an example
+                    return genres;
                 })
-                .orElse(Collections.emptyList()); // Return an empty list if the movie title is not found
+                .orElse(Collections.emptyList());
     }
     default boolean isMonthDayValid(String monthName, int day)
     {
@@ -244,9 +235,8 @@ public interface InputValidator
 
         if (maxDaysMap.containsKey(monthName)) {
             int maxDays = maxDaysMap.get(monthName);
-            if (isValidDay(day, maxDays)) {
+            if (isValidDay(day, maxDays))
                 return true;
-            }
         }
         return false;
     }

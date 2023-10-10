@@ -1,7 +1,6 @@
-package validator;
+package logic.validator;
 
 import pojo.Movie;
-import pojo.Person;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package validator;
+package logic.validator;
 
 import pojo.Address;
 

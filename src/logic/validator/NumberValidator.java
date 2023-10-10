@@ -1,6 +1,5 @@
-package validator;
+package logic.validator;
 
-import pojo.Person;
 import pojo.UserNumber;
 
 import java.util.Scanner;
