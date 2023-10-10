@@ -10,7 +10,7 @@ public interface Searcher
 {
     private Map storeRegionAndCitiesToMap()
     {
-        Map<String, String> regionCityMap = new HashMap<>();
+        Map<String, String> regionCityMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         File regionCityFile = new File("RegionAndCitiesInPhilippines");
         try
         {
@@ -29,7 +29,7 @@ public interface Searcher
     default String searchRegion(String input)
     {
         Map<String, String> regionCityMap = storeRegionAndCitiesToMap();
-        return regionCityMap.get(input).toString();
+        return regionCityMap.get(input);
     }
 
     default boolean cityExists(String input)
@@ -39,7 +39,7 @@ public interface Searcher
     }
     private Map storeCoursesIndustriesToMap()
     {
-        Map<String, String> courseIndustryMap = new HashMap<>();
+        Map<String, String> courseIndustryMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         File courseIndustryFile = new File("GeneralCoursesAndItsRespectiveIndustry");
         try {
             Files.lines(Paths.get(courseIndustryFile.getAbsolutePath()))
@@ -56,11 +56,7 @@ public interface Searcher
     default String searchIndustry(String input)
     {
         Map<String, String> courseIndustryMap = storeCoursesIndustriesToMap();
-        if (courseIndustryMap.containsKey(input))
-        {
-            return courseIndustryMap.get(input);
-        }
-        return "Course not found";
+        return courseIndustryMap.get(input);
     }
 
 }

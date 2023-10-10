@@ -6,15 +6,19 @@ public class Test implements InputValidator, Searcher {
     static Scanner scanner = new Scanner(System.in);
     static Test t = new Test();
     public static void main(String[] args) {
-        String martha = "martha";
-        out.println(martha.substring(0,1).toUpperCase() + martha.substring(1).toLowerCase());
+
+
+//        String martha = "martha";
+//        out.println(martha.substring(0,1).toUpperCase() + martha.substring(1).toLowerCase());
         out.println(t.allCharactersFromAMovie("Batman Begins"));
         out.println(t.isMovieCharacter("Batman Begins", "Alfred"));
         out.println(t.isMainCharacter("Batman Begins", "Batman"));
-        out.println(t.getGenre(" Sen to Chihiro no Kamikakushi"));
-        out.println(t.searchIndustry("computer science"));
-//        out.println(t.getCharactersForMovie("Batman Begins"));
-//        out.println(t.getSupportingCharacters("Batman Begins"));
+        out.println(t.getGenre("Sen to Chihiro no kamikakushi"));
+//        out.println(t.searchIndustry("computer science"));
+//        out.println(t.searchRegion("makati"));
+//        out.println(t.cityExists("pasig"));
+        out.println(t.getCharactersForMovie("Batman Begins"));
+        out.println(t.getSupportingCharacters("Batman Begins"));
 //        out.println(t.isStringInputValid("179-L"));
 //        out.println(t.isEnglishWord("Mary"));
 //        out.println(t.isEnglishWord("Kate"));

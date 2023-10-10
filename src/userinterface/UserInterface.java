@@ -54,7 +54,7 @@ public class UserInterface implements InputValidator, Searcher
                 Birth year: 2002
                 Birth place: Cavite
                 Barangay: San Antonio
-                Course: Accounting
+                Course: Computer Science
                 City: Makati
                 
                 Favorites
