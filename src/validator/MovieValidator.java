@@ -1,6 +1,7 @@
 package validator;
 
 import pojo.Movie;
+import pojo.Person;
 
 import java.util.Scanner;
 
@@ -11,26 +12,35 @@ public class MovieValidator implements ValidationMethod, InputValidator
 {
     private Scanner scanner = new Scanner(in);
     private Movie movie;
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
 
     @Override
     public boolean validate() {
-        // Favorites sector
-        out.println("Favorite Movie title: ");
+
+        out.println(ANSI_BLUE + "\nFavorites");
+        out.println("Movie title: ");
         String movieName = scanner.nextLine();
-        out.println("Favorite Movie character: ");
+        out.println("Movie character: " + ANSI_RESET);
         String movieCharacter = scanner.nextLine();
 
-        // Add a database of movies
         if (isMovieCharacter(movieName, movieCharacter))
         {
             movie = new Movie();
             movie.setMovieTitle(movieName);
             movie.setMovieCharacter(movieCharacter);
-
-            // For debugging, have to remove
-            out.println(movie.getMovieTitle() + " " + movie.getMovieCharacter());
+            setMovie(movie);
             return true;
         }
         return false;
     }
+
 }

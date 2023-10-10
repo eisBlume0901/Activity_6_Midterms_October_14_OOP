@@ -9,25 +9,36 @@ public class AddressValidator implements ValidationMethod, InputValidator, Searc
 {
     private Scanner scanner = new Scanner(in);
     private Address address;
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     @Override
     public boolean validate()
     {
-        out.println("Barangay: ");
+        out.println(ANSI_GREEN + "Barangay: ");
         String barangayName = scanner.nextLine();
-        out.println("City: ");
+        out.println("City: " + ANSI_RESET);
         String cityName = scanner.nextLine();
 
-        // East Rembo is a unique word
         if (isPhraseValid(barangayName) && cityExists(cityName))
         {
             address = new Address();
             address.setBarangay(barangayName);
             address.setCity(cityName);
+            setAddress(address);
             return true;
         }
         return false;
     }
+
 }
 
 

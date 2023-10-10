@@ -125,9 +125,11 @@ public interface InputValidator
                 .map(s -> s.split(label))
                 .filter(parts -> parts.length > 1)
                 // Split the second part by semicolons and trim the values
-                .map(parts -> Arrays.stream(parts[1].split(";"))
-                        .map(String::trim)
-                        .collect(Collectors.toList()))
+                .map(parts -> {
+                    return Arrays.stream(parts[1].split(";"))
+                            .map(s -> s.trim())
+                            .collect(Collectors.toList());
+                })
                 .orElse(Collections.emptyList());
     }
 
@@ -137,7 +139,7 @@ public interface InputValidator
                 .map(s -> s.split(label))
                 .filter(parts -> parts.length > 1)
                 .map(parts -> Arrays.stream(parts[1].split(";"))
-                        .map(String::trim)
+                        .map(s -> s.trim())
                         .collect(Collectors.toList()))
                 .orElse(Collections.emptyList());
     }
@@ -145,20 +147,18 @@ public interface InputValidator
     default boolean isMainCharacter(String movie, String movieCharacter)
     {
         List<String> mainCharacters = getCharactersForMovie(movie);
-        if (mainCharacters.contains(movieCharacter))
-        {
-            return true;
-        }
+        for (String character : mainCharacters)
+            if (character.equalsIgnoreCase(movieCharacter))
+                return true;
         return false;
     }
 
     default boolean isSupportingCharacter(String movie, String movieCharacter)
     {
         List<String> supportingCharacters = getSupportingCharacters(movie);
-        if (supportingCharacters.contains(movieCharacter))
-        {
-            return true;
-        }
+        for (String character : supportingCharacters)
+            if (character.equalsIgnoreCase(movieCharacter))
+                return true;
         return false;
     }
 
@@ -166,10 +166,17 @@ public interface InputValidator
     {
         List<String> characterList = allCharactersFromAMovie(movie);
 
-        return characterList.contains(movieCharacter);
+        for (String character : characterList)
+        {
+            if (character.equalsIgnoreCase(movieCharacter))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
-    private List<String> allCharactersFromAMovie(String movie)
+    default List<String> allCharactersFromAMovie(String movie)
     {
         List<String> mainCharacters = getCharactersForMovie(movie);
         List<String> supportingCharacters = getSupportingCharacters(movie);
@@ -178,8 +185,7 @@ public interface InputValidator
         return allCharacters;
     }
 
-    private List<String> getCharactersForMovie(String movieTitle) {
-        // NOTICE THE HASHMAP it should be compatible with the map -> entry
+    default List<String> getCharactersForMovie(String movieTitle) {
         Map<String, Map<List<String>, Map<List<String>, List<String>>>> movieMap = storeMoviesToMap();
 
         return movieMap.entrySet().stream()
@@ -193,8 +199,7 @@ public interface InputValidator
                 .orElse(Collections.emptyList()); // Return an empty list if the movie title is not found
     }
 
-    private List<String> getSupportingCharacters(String movieTitle) {
-        // NOTICE THE HASHMAP it should be compatible with the map -> entry
+    default List<String> getSupportingCharacters(String movieTitle) {
         Map<String, Map<List<String>, Map<List<String>, List<String>>>> movieMap = storeMoviesToMap();
 
         return movieMap.entrySet().stream()
@@ -209,7 +214,6 @@ public interface InputValidator
     }
 
     default List<String> getGenre(String movieTitle) {
-        // NOTICE THE HASHMAP it should be compatible with the map -> entry
         Map<String, Map<List<String>, Map<List<String>, List<String>>>> movieMap = storeMoviesToMap();
 
         return movieMap.entrySet().stream()
@@ -238,21 +242,11 @@ public interface InputValidator
         maxDaysMap.put("November", 30);
         maxDaysMap.put("December", 31);
 
-        if (maxDaysMap.containsKey(monthName))
-        {
+        if (maxDaysMap.containsKey(monthName)) {
             int maxDays = maxDaysMap.get(monthName);
             if (isValidDay(day, maxDays)) {
-                System.out.println("Valid date");
                 return true;
             }
-            else
-            {
-                System.out.println("Invalid day for " + monthName);
-            }
-        }
-        else
-        {
-            System.out.println("Invalid month name");
         }
         return false;
     }

@@ -45,6 +45,8 @@ public class BirthDateAndPlace
 
     @Override
     public String toString() {
-        return birthMonth + " " + birthDay + ", " + birthYear;
+        String birthMonthProperCapitalization = birthMonth.toString().substring(0,1).toUpperCase() +
+                birthMonth.toString().substring(1).toLowerCase();
+        return birthMonthProperCapitalization + " " + birthDay + ", " + birthYear;
     }
 }

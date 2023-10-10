@@ -1,7 +1,7 @@
 package userinterface;
+import pojo.Name;
 import pojo.Person;
 import validator.*;
-
 import java.time.LocalDate;
 import java.util.*;
 import static java.lang.System.*;
@@ -10,10 +10,25 @@ public class UserInterface implements InputValidator, Searcher
 {
     private Scanner scanner;
     private Person person;
+    private NameValidator nameValidator;
+    private BirthDateAndPlaceValidator birthDateAndPlaceValidator;
+    private AddressValidator addressValidator;
+    private CourseValidator courseValidator;
+    private MovieValidator movieValidator;
+    private FoodValidator foodValidator;
+    private NumberValidator numberValidator;
 
     public UserInterface()
     {
         scanner = new Scanner(in);
+        person = new Person();
+        nameValidator = new NameValidator();
+        birthDateAndPlaceValidator = new BirthDateAndPlaceValidator();
+        addressValidator = new AddressValidator();
+        courseValidator = new CourseValidator();
+        movieValidator = new MovieValidator();
+        foodValidator = new FoodValidator();
+        numberValidator = new NumberValidator();
     }
     public void start()
     {
@@ -27,21 +42,48 @@ public class UserInterface implements InputValidator, Searcher
         }
     }
 
+    private void sampleOutputDisplay()
+    {
+        out.println("\033[m" + """
+                Personal Details
+                First name: Maria Isabel Antonia
+                Middle name:  Santos
+                Last name: Cruz 
+                Birth month: January
+                Birth day: 25
+                Birth year: 2002
+                Birth place: Cavite
+                Barangay: San Antonio
+                Course: Accounting
+                City: Makati
+                
+                Favorites
+                Movie title: The Lord of the Rings: The Fellowship of the Ring
+                Movie character: Frodo Baggins
+                Food: Potato salad
+                Number: 7
+                
+                Preferred Number of Children: 3
+                """ + "\033[0m");
+
+    }
+
     private List<ValidationMethod> storeValidators()
     {
         List<ValidationMethod> validators = new ArrayList<>();
-        validators.add(new NameValidator());
-        validators.add(new BirthDateAndPlaceValidator());
-        validators.add(new AddressValidator());
-        validators.add(new CourseValidator());
-        validators.add(new MovieValidator());
-        validators.add(new FoodValidator());
-        validators.add(new NumberValidator());
+        validators.add(nameValidator);
+        validators.add(birthDateAndPlaceValidator);
+        validators.add(addressValidator);
+        validators.add(courseValidator);
+        validators.add(movieValidator);
+        validators.add(foodValidator);
+        validators.add(numberValidator);
 
         return validators;
     }
     private boolean validateEntries()
     {
+        sampleOutputDisplay();
         List<ValidationMethod> entries = storeValidators();
         int maxReruns = 5;
         int baseSleepTime = 15000;
@@ -116,13 +158,25 @@ public class UserInterface implements InputValidator, Searcher
         }
     }
 
+    private void saveDetailsToPersonObject()
+    {
+        person.setName(nameValidator.getName());
+        person.setBirthDatePlace(birthDateAndPlaceValidator.getBirthDateAndPlace());
+        person.setAddress(addressValidator.getAddress());
+        person.setCourse(courseValidator.getCourse());
+        person.setMovie(movieValidator.getMovie());
+        person.setFood(foodValidator.getFood());
+        person.setUserNumber(numberValidator.getUserNumber());
+
+    }
+
     // For debugging
     private void displayResults()
     {
-        person = new Person();
+        saveDetailsToPersonObject();
         out.println("Personal Information ");
         out.println("Name: " + person.getName().toString()); // String
-        out.println("BirthDate: " + person.getBirthDatePlace().toString()); // String
+        out.println("Birth date: " + person.getBirthDatePlace().toString()); // String
         out.println("Age: " + calculateAge(LocalDate.of(
                 person.getBirthDatePlace().getBirthYear(),
                 person.getBirthDatePlace().getBirthMonth(),
@@ -131,7 +185,7 @@ public class UserInterface implements InputValidator, Searcher
                 person.getAddress().getBarangay() + ", " +
                 person.getAddress().getCity() + ", " +
                 searchRegion(person.getAddress().getCity())); // String
-        out.println("Course: " + person.getCourse() + ", " + searchIndustry(person.getCourse().getCourseName())); // String
+        out.println("Course: " + person.getCourse().getCourseName() + ", " + searchIndustry(person.getCourse().getCourseName())); // String
 
         out.println("Favorites ");
         out.println("Movie: " + person.getMovie().getMovieTitle()); // String

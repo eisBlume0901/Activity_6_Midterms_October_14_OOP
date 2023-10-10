@@ -1,27 +1,35 @@
 package validator;
 
 import pojo.BirthDateAndPlace;
-
-import java.time.LocalDate;
-import java.time.Year;
-import java.util.Scanner;
+import pojo.Person;
+import java.util.*;
 import static java.lang.System.*;
 
 public class BirthDateAndPlaceValidator implements ValidationMethod, InputValidator, Searcher
 {
     private Scanner scanner = new Scanner(in);
     private BirthDateAndPlace birthDateAndPlace;
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_YELLOW = "\u001B[31m";
+
+    public BirthDateAndPlace getBirthDateAndPlace() {
+        return birthDateAndPlace;
+    }
+
+    public void setBirthDateAndPlace(BirthDateAndPlace birthDateAndPlace) {
+        this.birthDateAndPlace = birthDateAndPlace;
+    }
 
     @Override
     public boolean validate()
     {
-        out.println("Birth Month: ");
+        out.println(ANSI_YELLOW + "Birth month: ");
         String birthMonth = scanner.nextLine();
-        out.println("Birth Day: ");
+        out.println("Birth day: ");
         int birthDay = Integer.parseInt(scanner.nextLine());
-        out.println("Birth Year: ");
+        out.println("Birth year: ");
         int birthYear = Integer.parseInt(scanner.nextLine());
-        out.println("Birth Place: "); // City
+        out.println("Birth place: " + ANSI_RESET); // City
         String birthPlace = scanner.nextLine();
 
         if (isMonthDayValid(birthMonth, birthDay) &&
@@ -33,14 +41,10 @@ public class BirthDateAndPlaceValidator implements ValidationMethod, InputValida
             birthDateAndPlace.setBirthDay(birthDay);
             birthDateAndPlace.setBirthYear(birthYear);
             birthDateAndPlace.setBirthPlace(birthPlace);
-
-
-            // For debugging have to remove
-            out.println("Age: " + calculateAge(LocalDate.of(birthDateAndPlace.getBirthYear(),
-                    birthDateAndPlace.getBirthMonth(), birthDateAndPlace.getBirthDay())));
-
+            setBirthDateAndPlace(birthDateAndPlace);
             return true;
         }
         return false;
     }
+
 }
