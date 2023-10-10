@@ -68,4 +68,19 @@ public class StringProcessor
         }
         return count;
     }
+
+    public String formatParagraph(String paragraph) {
+        StringBuilder formattedText = new StringBuilder();
+        String[] lines = paragraph.split("\n");
+        int currentLineLength = 0;
+        for (String line : lines) {
+            if (currentLineLength + line.length() > 300) {
+                formattedText.append("\n");
+                currentLineLength = 0;
+            }
+            formattedText.append(line).append("\n");
+            currentLineLength += line.length();
+        }
+        return formattedText.toString();
+    }
 }

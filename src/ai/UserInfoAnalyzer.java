@@ -234,6 +234,7 @@ public class UserInfoAnalyzer {
     }
 
     // Format a paragraph with proper indentation and line breaks
+    // finn
     private static String formatParagraph(String paragraph) {
         StringBuilder formattedText = new StringBuilder();
         String[] lines = paragraph.split("\n");
