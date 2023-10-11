@@ -60,19 +60,19 @@ public class ReportGenerator implements InputValidator
         String movieTitle = person.getMovie().getMovieTitle();
         List<String> genreList = getGenre(person.getMovie().getMovieTitle());
         String genres = genreList.toString().substring(1, genreList.toString().length() - 1);
-        report.append("'The genre(s) of ").append(fullName).append("'s favorite movie, ").append(movieTitle).append(", is/are ").append(genres).append(".");
+        report.append("The genre(s) of ").append(firstName).append("'s favorite movie, ").append(movieTitle).append(", is/are ").append(genres).append(". ");
 
         String movieCharacter = person.getMovie().getMovieCharacter();
 
         report.append(movieCharacter);
 
         if (isMainCharacter(movieTitle, movieCharacter))
-            report.append(" is the main character").append(".");
+            report.append(" is the main character").append(". ");
         if (isSupportingCharacter(movieTitle, movieCharacter))
-            report.append(" is the supporting character").append(".");
+            report.append(" is the supporting character").append(". ");
 
         int numberOfChildren = person.getUserNumber().getPreferredNumberOfChildren();
-        userInfoAnalyzer.providePsychologicalFeedback(report, numberOfChildren);
+        report.append(userInfoAnalyzer.providePsychologicalFeedback(numberOfChildren));
 
         int reportLetterCount = stringProcessor.countLettersInText(report.toString());
         int lettersPerLine = 300;
@@ -80,9 +80,9 @@ public class ReportGenerator implements InputValidator
             report.insert(i, "\n");
             reportLetterCount++;
         }
+
         String formattedReport = stringProcessor.formatParagraph(report.toString());
         System.out.println(formattedReport);
-
     }
 
 }

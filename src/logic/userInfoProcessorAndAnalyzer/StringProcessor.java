@@ -71,7 +71,7 @@ public class StringProcessor
 
     public String formatParagraph(String paragraph) {
         StringBuilder formattedText = new StringBuilder();
-        String[] lines = paragraph.split("\n");
+        List<String> lines = List.of(paragraph.split("\n"));
         int currentLineLength = 0;
         for (String line : lines) {
             if (currentLineLength + line.length() > 300) {
