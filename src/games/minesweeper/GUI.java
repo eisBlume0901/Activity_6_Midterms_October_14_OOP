@@ -11,42 +11,42 @@ import java.util.Random;
 public class GUI extends JFrame{
     public boolean resetter = false;
 
-        public boolean flag = false;
+    public boolean flag = false;
 
-        Date startDate = new Date();
-        Date endDate;
-        int spacing = 5;
-        static int neighs = 0;
-        String gameMes;
-        int gameMesX = 700;
-        int gameMesY = -50;
-        public int mx = -100;
-        public int my = -100;
+    Date startDate = new Date();
+    Date endDate;
+    int spacing = 5;
+    static int neighs = 0;
+    String gameMes;
+    int gameMesX = 700;
+    int gameMesY = -50;
+    public int mx = -100;
+    public int my = -100;
 
-        public int smileyX = 605;
-        public int smileyY = 5;
-        public int smileyCenterX = smileyX + 35;
-        public int smileyCenterY = smileyY + 35;
-        
-        public int flagX = 445;
-        public int flagY = 5;
-        public int flagCenterX = flagX + 35;
-        public int flagCenterY = flagY + 35;
+    public int smileyX = 605;
+    public int smileyY = 5;
+    public int smileyCenterX = smileyX + 35;
+    public int smileyCenterY = smileyY + 35;
 
-        public int spacingX = 90;
-        public int spacingY = 10;
-        public int minusX = spacingX + 160;
-        public int minusY = spacingY;
-        public int plusX = spacingX + 240;
-        public int plusY = spacingY;
+    public int flagX = 445;
+    public int flagY = 5;
+    public int flagCenterX = flagX + 35;
+    public int flagCenterY = flagY + 35;
 
-        public int timeCountX = 1130;
-        public int timeCountY = 5;
-        public int sec = 0;
+    public int spacingX = 90;
+    public int spacingY = 10;
+    public int minusX = spacingX + 160;
+    public int minusY = spacingY;
+    public int plusX = spacingX + 240;
+    public int plusY = spacingY;
 
-        public boolean happy = true;
-        public boolean victory = false;
-        public boolean defeat = false;
+    public int timeCountX = 1130;
+    public int timeCountY = 5;
+    public int sec = 0;
+
+    public boolean happy = true;
+    public boolean victory = false;
+    public boolean defeat = false;
 
     static Random rand = new Random();
     static int[][] mines = new int[16][7];
@@ -389,7 +389,7 @@ public class GUI extends JFrame{
         for(int i = 0; i < 16; i++) {
             for (int j = 0; j < 7; j++) {
                 if( mines[i][j] == 1){
-                  total ++;
+                    total ++;
                 }
             }
         }
@@ -427,7 +427,7 @@ public class GUI extends JFrame{
             for(int j =0; j < 7; j++){
                 if(mx >= spacing + i * 80 && mx < spacing + i * 80 + 80 - 2 * spacing &&
                         my >= spacing + j * 80 + 80 + 26 && my < spacing + j * 80 + 80 + 80 + 26 - 2 * spacing){
-                        return i;
+                    return i;
                 }
             }
         }
