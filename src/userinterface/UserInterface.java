@@ -1,6 +1,6 @@
 package userinterface;
 
-import games.minesweeper.MineSweeper;
+import games.minesweeper.MineSweeperGame;
 import games.racecar.RaceCarGame;
 import logic.EntryValidator;
 import logic.userInfoProcessorAndAnalyzer.ReportGenerator;
@@ -12,7 +12,7 @@ public class UserInterface
 {
     private StringProcessor stringProcessor;
     private RaceCarGame raceCarGame;
-//    private MineSweeper mineSweeper;
+    private MineSweeperGame mineSweeperGame;
     private ReportGenerator reportGenerator;
     private EntryValidator entryValidator;
     private Scanner scanner;
@@ -20,13 +20,11 @@ public class UserInterface
     public UserInterface()
     {
         stringProcessor = new StringProcessor();
-        raceCarGame = new RaceCarGame();
-//        mineSweeper = new MineSweeper();
         reportGenerator = new ReportGenerator();
         entryValidator = new EntryValidator();
         scanner = new Scanner(System.in);
     }
-    public void getUserReplyAndDecideAction() {
+    public void start() {
         // Ask the user for a reply
         entryValidator.validateEntries();
         reportGenerator.displayReport(entryValidator.saveDetailsToPersonObject());
@@ -41,6 +39,7 @@ public class UserInterface
             if ("yes".equals(playGame)) {
                 System.out.println("Redirecting you to play a 1 vs 1 race car game. Enjoy!");
                 // TODO: Redirects user to race car game :D
+                raceCarGame = new RaceCarGame();
                 raceCarGame.run();
             } else {
                 System.out.println("Exiting the program. Goodbye!");
@@ -52,7 +51,7 @@ public class UserInterface
         } else {
             System.out.println("Your reply is less than 30 words. Redirecting you to play a minesweeper game. Enjoy!");
             // TODO: Insert minesweeper heeere
-//            mineSweeper.run();
+            mineSweeperGame = new MineSweeperGame();
         }
     }
 }

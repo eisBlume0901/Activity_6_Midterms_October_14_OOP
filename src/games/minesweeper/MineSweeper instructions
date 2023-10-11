@@ -1,8 +1,0 @@
-Hello and Welcome to the MineSweeper game
-
-Mechanics
-* Once you start the program the timer will start
-* In order to place or remove a flag you will have to first click the flag icon and by clicking
-  it should turn red
-* The player wins if all bombs were marked with the red flag else you will lose
-  if you happen to click a mine

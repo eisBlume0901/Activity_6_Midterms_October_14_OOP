@@ -1,10 +1,10 @@
 package games.minesweeper;
 
-public class MineSweeper implements Runnable {
+public class MineSweeperGame implements Runnable {
     GUI gui = new GUI();
 
     public static void main(String[] args) {
-//        new Thread(new MineSweeper()).start();
+        new Thread(new MineSweeperGame()).start();
     }
 
     @Override
@@ -13,6 +13,7 @@ public class MineSweeper implements Runnable {
             gui.repaint();
             if(!gui.resetter) {
                 gui.checkVictoryStatus();
+                System.out.println("Victory: " + gui.victory + ", Defeat: " + gui.defeat);
             }
         }
     }
