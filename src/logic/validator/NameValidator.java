@@ -32,8 +32,9 @@ public class NameValidator implements ValidationMethod, InputValidator
         String lastName = scanner.nextLine();
 
         if ( isPhraseValid(firstName) &&
-                isStringInputValid(middleName) &&
-                isStringInputValid(lastName) )
+                isSentenceValid(firstName) &&
+                isPhraseValid(middleName) &&
+                isPhraseValid(lastName) )
         {
             name = new Name();
             name.setFirstName(firstName);

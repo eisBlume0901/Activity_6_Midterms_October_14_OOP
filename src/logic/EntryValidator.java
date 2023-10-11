@@ -59,12 +59,9 @@ public class EntryValidator implements InputValidator, Searcher
         validators.add(foodValidator);
         validators.add(numberValidator);
 
-        int maxReruns = 5;
-        int baseSleepTime = 15000;
-        int maxSleepTime = 40000;
+        int baseSleepTime = 20000;
+        int nextBaseSleepTime = 40000;
         int countdownIncrease = 5000;
-
-        boolean allEntriesValid = true;
 
         int count = 0;
         for (ValidationMethod vm : validators)
@@ -73,36 +70,33 @@ public class EntryValidator implements InputValidator, Searcher
             int rerunCount = 0;
             int sleepTime = baseSleepTime;
 
-            while (!validInput && rerunCount < maxReruns)
+            while (!validInput)
             {
-                validInput = validators.get(count).validate(); // Invoke the validate method
+                validInput = validators.get(count).validate();
                 rerunCount++;
 
-                if (!validInput)
-                {
-                    if (rerunCount > 0)
-                    {
-                        sleepTime += countdownIncrease;
-                        if (sleepTime > maxSleepTime)
-                        {
-                            sleepTime = maxSleepTime;
-                        }
-                        err.println("Input validation failed. Rerunning in ...");
-                        countdownTimer(sleepTime / 1000);
-                    }
-                }
                 if (validInput)
                 {
                     count++;
                     break;
                 }
+                else
+                {
+                    if (rerunCount > 0)
+                    {
+                        sleepTime += countdownIncrease;
+
+                        if (sleepTime == nextBaseSleepTime)
+                        {
+                            sleepTime = nextBaseSleepTime;
+                            sleepTime += countdownIncrease;
+                        }
+                        err.println("Input validation failed. Rerunning in ...");
+                        countdownTimer(sleepTime / 1000);
+                    }
+                }
             }
 
-            if (!validInput) {
-                err.println("Input validation failed after " + rerunCount + " reruns. Exiting...");
-                allEntriesValid = false;
-                break;
-            }
         }
     }
 
@@ -110,12 +104,12 @@ public class EntryValidator implements InputValidator, Searcher
     {
         for (int i = seconds; i >= 1; i--)
         {
-            out.print(i + " ");
+            err.print(i + " ");
             sleep(1000);
 
             if (i == 1)
             {
-                out.print("seconds");
+                err.print("seconds");
             }
         }
         out.println();

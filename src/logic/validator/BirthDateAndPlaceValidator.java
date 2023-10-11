@@ -26,20 +26,22 @@ public class BirthDateAndPlaceValidator implements ValidationMethod, InputValida
         out.println(ANSI_YELLOW + "Birth month: ");
         String birthMonth = scanner.nextLine();
         out.println("Birth day: ");
-        int birthDay = Integer.parseInt(scanner.nextLine());
+        String birthDay = scanner.nextLine();
         out.println("Birth year: ");
-        int birthYear = Integer.parseInt(scanner.nextLine());
+        String birthYear = scanner.nextLine();
         out.println("Birth place: " + ANSI_RESET); // City
         String birthPlace = scanner.nextLine();
 
-        if (isMonthDayValid(birthMonth, birthDay) &&
-                isYearValid(birthYear) &&
+        if (birthDay.matches("-?\\d+") &&
+                isMonthDayValid(birthMonth, Integer.parseInt(birthDay)) &&
+                birthYear.matches("-?\\d+") &&
+                isYearValid(Integer.parseInt(birthYear)) &&
                 cityExists(birthPlace))
         {
             birthDateAndPlace = new BirthDateAndPlace();
             birthDateAndPlace.setBirthMonth(getMonthNumber(birthMonth));
-            birthDateAndPlace.setBirthDay(birthDay);
-            birthDateAndPlace.setBirthYear(birthYear);
+            birthDateAndPlace.setBirthDay(Integer.parseInt(birthDay));
+            birthDateAndPlace.setBirthYear(Integer.parseInt(birthYear));
             birthDateAndPlace.setBirthPlace(birthPlace);
             setBirthDateAndPlace(birthDateAndPlace);
             return true;

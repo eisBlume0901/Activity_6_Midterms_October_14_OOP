@@ -28,14 +28,15 @@ public class NumberValidator implements ValidationMethod
     public boolean validate() {
 
         out.println(ANSI_BLUE + "Number: " + ANSI_RESET);
-        int favoriteNumber = Integer.parseInt(scanner.nextLine());
+        String favoriteNumber = scanner.nextLine();
         out.println(ANSI_PURPLE + "\nPreferred Number of Children: " + ANSI_RESET);
         int preferredNumber = Integer.parseInt(scanner.nextLine());
 
-        if (preferredNumber >= 0)
+        if (favoriteNumber.matches("-?\\d+") &&
+                preferredNumber >= 0)
         {
             userNumber =  new UserNumber();
-            userNumber.setFavoriteNumber(favoriteNumber);
+            userNumber.setFavoriteNumber(Integer.parseInt(favoriteNumber));
             userNumber.setPreferredNumberOfChildren(preferredNumber);
             setUserNumber(userNumber);
             return true;

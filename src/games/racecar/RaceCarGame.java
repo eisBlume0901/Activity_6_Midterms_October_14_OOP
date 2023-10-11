@@ -15,6 +15,12 @@ public class RaceCarGame {
 
         if (modeChoice.equalsIgnoreCase("Manual")) {
             isAutomatic = false;
+            System.out.println("""
+                    "W" Move
+                    "Shift" Gear Up 
+                    "CTRL" Gearn Down
+                    "Space" Break                    
+                    """);
             raceTrackLength();
         } else if (modeChoice.equalsIgnoreCase("Automatic")) {
             isAutomatic = true;
