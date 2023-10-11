@@ -1,4 +1,4 @@
-package logic.reportGenerator;
+package logic.userInfoProcessorAndAnalyzer;
 
 import java.time.MonthDay;
 import java.util.HashMap;

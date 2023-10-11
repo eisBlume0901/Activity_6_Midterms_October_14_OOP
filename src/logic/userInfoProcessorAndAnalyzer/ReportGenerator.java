@@ -1,12 +1,9 @@
-package logic.reportGenerator;
+package logic.userInfoProcessorAndAnalyzer;
 
-
-import logic.EntryValidator;
 import logic.validator.InputValidator;
 import pojo.Person;
+import java.time.*;
 
-import java.time.LocalDate;
-import java.time.MonthDay;
 
 public class ReportGenerator implements InputValidator
 {
@@ -71,6 +68,5 @@ public class ReportGenerator implements InputValidator
         String formattedReport = stringProcessor.formatParagraph(report.toString());
         System.out.println(formattedReport);
     }
-
 
 }

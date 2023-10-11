@@ -1,4 +1,4 @@
-package logic.reportGenerator;
+package logic.userInfoProcessorAndAnalyzer;
 
 import java.util.*;
 import java.util.regex.*;
