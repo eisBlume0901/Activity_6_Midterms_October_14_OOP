@@ -52,6 +52,7 @@ public class UserInterface
             System.out.println("Your reply is less than 30 words. Redirecting you to play a minesweeper game. Enjoy!");
             // TODO: Insert minesweeper heeere
             mineSweeperGame = new MineSweeperGame();
+            mineSweeperGame.run();
         }
     }
 }
