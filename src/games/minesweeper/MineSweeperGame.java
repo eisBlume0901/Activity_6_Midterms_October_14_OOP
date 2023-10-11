@@ -13,7 +13,7 @@ public class MineSweeperGame implements Runnable {
             gui.repaint();
             if(!gui.resetter) {
                 gui.checkVictoryStatus();
-                System.out.println("Victory: " + gui.victory + ", Defeat: " + gui.defeat);
+//                System.out.println("Victory: " + gui.victory + ", Defeat: " + gui.defeat);
             }
         }
     }
