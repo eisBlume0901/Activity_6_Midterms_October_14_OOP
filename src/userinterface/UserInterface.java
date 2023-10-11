@@ -12,7 +12,7 @@ public class UserInterface
 {
     private StringProcessor stringProcessor;
     private RaceCarGame raceCarGame;
-    private MineSweeper mineSweeper;
+//    private MineSweeper mineSweeper;
     private ReportGenerator reportGenerator;
     private EntryValidator entryValidator;
     private Scanner scanner;
@@ -21,7 +21,7 @@ public class UserInterface
     {
         stringProcessor = new StringProcessor();
         raceCarGame = new RaceCarGame();
-        mineSweeper = new MineSweeper();
+//        mineSweeper = new MineSweeper();
         reportGenerator = new ReportGenerator();
         entryValidator = new EntryValidator();
         scanner = new Scanner(System.in);
@@ -52,7 +52,7 @@ public class UserInterface
         } else {
             System.out.println("Your reply is less than 30 words. Redirecting you to play a minesweeper game. Enjoy!");
             // TODO: Insert minesweeper heeere
-            mineSweeper.run();
+//            mineSweeper.run();
         }
     }
 }

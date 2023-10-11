@@ -4,7 +4,7 @@ public class MineSweeper implements Runnable {
     GUI gui = new GUI();
 
     public static void main(String[] args) {
-        new Thread(new MineSweeper()).start();
+//        new Thread(new MineSweeper()).start();
     }
 
     @Override
