@@ -1,15 +1,10 @@
 package logic;
-import logic.reportGenerator.StringProcessor;
-import logic.reportGenerator.UserInfoAnalyzer;
 import pojo.Person;
 import logic.validator.*;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.MonthDay;
 import java.util.*;
 import static java.lang.System.*;
 
-public class UserInputController implements InputValidator, Searcher
+public class EntryValidator implements InputValidator, Searcher
 {
     private Person person;
     private NameValidator nameValidator;
@@ -19,10 +14,7 @@ public class UserInputController implements InputValidator, Searcher
     private MovieValidator movieValidator;
     private FoodValidator foodValidator;
     private NumberValidator numberValidator;
-//    private StringProcessor stringProcessor;
-//    private UserInfoAnalyzer userInfoAnalyzer;
-
-    public UserInputController()
+    public EntryValidator()
     {
         person = new Person();
         nameValidator = new NameValidator();
@@ -32,22 +24,9 @@ public class UserInputController implements InputValidator, Searcher
         movieValidator = new MovieValidator();
         foodValidator = new FoodValidator();
         numberValidator = new NumberValidator();
-//        stringProcessor = new StringProcessor();
-//        userInfoAnalyzer = new UserInfoAnalyzer();
-    }
-    public void start()
-    {
-        if (validateEntries())
-        {
-//            displayResults();
-        }
-        else
-        {
-            out.println("Wrong entries bye bye");
-        }
     }
 
-    private void sampleOutputDisplay()
+    public void validateEntries()
     {
         out.println("\033[m" + """
                 Personal Details
@@ -71,10 +50,6 @@ public class UserInputController implements InputValidator, Searcher
                 Preferred Number of Children: 3
                 """ + "\033[0m");
 
-    }
-
-    private List<ValidationMethod> storeValidators()
-    {
         List<ValidationMethod> validators = new ArrayList<>();
         validators.add(nameValidator);
         validators.add(birthDateAndPlaceValidator);
@@ -84,12 +59,6 @@ public class UserInputController implements InputValidator, Searcher
         validators.add(foodValidator);
         validators.add(numberValidator);
 
-        return validators;
-    }
-    private boolean validateEntries()
-    {
-        sampleOutputDisplay();
-        List<ValidationMethod> entries = storeValidators();
         int maxReruns = 5;
         int baseSleepTime = 15000;
         int maxSleepTime = 40000;
@@ -98,7 +67,7 @@ public class UserInputController implements InputValidator, Searcher
         boolean allEntriesValid = true;
 
         int count = 0;
-        for (ValidationMethod vm : entries)
+        for (ValidationMethod vm : validators)
         {
             boolean validInput = false;
             int rerunCount = 0;
@@ -106,7 +75,7 @@ public class UserInputController implements InputValidator, Searcher
 
             while (!validInput && rerunCount < maxReruns)
             {
-                validInput = entries.get(count).validate(); // Invoke the validate method
+                validInput = validators.get(count).validate(); // Invoke the validate method
                 rerunCount++;
 
                 if (!validInput)
@@ -135,7 +104,6 @@ public class UserInputController implements InputValidator, Searcher
                 break;
             }
         }
-        return allEntriesValid;
     }
 
     private void countdownTimer(int seconds)
@@ -165,7 +133,7 @@ public class UserInputController implements InputValidator, Searcher
         }
     }
 
-    private void saveDetailsToPersonObject()
+    public Person saveDetailsToPersonObject()
     {
         person.setName(nameValidator.getName());
         person.setBirthDatePlace(birthDateAndPlaceValidator.getBirthDateAndPlace());
@@ -175,9 +143,9 @@ public class UserInputController implements InputValidator, Searcher
         person.setFood(foodValidator.getFood());
         person.setUserNumber(numberValidator.getUserNumber());
 
+        return person;
     }
 
-    // For debugging
 //    private void displayResults()
 //    {
 //        saveDetailsToPersonObject();
@@ -227,18 +195,18 @@ public class UserInputController implements InputValidator, Searcher
 //
 //        StringBuilder report = new StringBuilder();
 //        userInfoAnalyzer.providePsychologicalFeedback(report, person.getUserNumber().getPreferredNumberOfChildren());
-//        /*
-//        I MAY OVERSEE OTHER REUQIREMENTS SO PLEASE DOUBLE CHECK
-//        HAVE A METHOD ALREADY 1. What is the reign of the user's address? (e.g. Cavite -> Region IV-A)
-//        HAVE A METHOD ALREADY 2. What classification of the user's course? (e.g. IT -> Technology)
-//        3. How many consonants and vowels in the user's full name?
-//        4. How many words in the user's full name?
-//        5. Check if the user's age is Senior, Mid, Teenager, Child or Baby
-//        6. Check what is the zodiac sign of the user
-//        HAVE A METHOD ALREADY 7. Identify if the user's fav. movie is action, comedy, or thriller
-//        HAVE A METHOD ALREADY 8. Identify if the user's fav. movie character is the main character or supporting character.
-//        9. Get the binary, octal & hexadecimal value of the user's  fav. number
-//        10. Provide user's own psychological feedback based on the preferred number of children by the user.
-//         */
+////        /*
+////        I MAY OVERSEE OTHER REUQIREMENTS SO PLEASE DOUBLE CHECK
+////        HAVE A METHOD ALREADY 1. What is the reign of the user's address? (e.g. Cavite -> Region IV-A)
+////        HAVE A METHOD ALREADY 2. What classification of the user's course? (e.g. IT -> Technology)
+////        3. How many consonants and vowels in the user's full name?
+////        4. How many words in the user's full name?
+////        5. Check if the user's age is Senior, Mid, Teenager, Child or Baby
+////        6. Check what is the zodiac sign of the user
+////        HAVE A METHOD ALREADY 7. Identify if the user's fav. movie is action, comedy, or thriller
+////        HAVE A METHOD ALREADY 8. Identify if the user's fav. movie character is the main character or supporting character.
+////        9. Get the binary, octal & hexadecimal value of the user's  fav. number
+////        10. Provide user's own psychological feedback based on the preferred number of children by the user.
+////         */
 //    }
 }

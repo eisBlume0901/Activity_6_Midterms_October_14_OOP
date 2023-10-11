@@ -39,7 +39,7 @@ greater than 300 words letters insert a nextline. Once you provide the comprehen
 to the user, the user can provide a reply and the program will analyze the reply. Check if the
 reply of the user is greater than 300 words -> if yes, ask the user if he/she wants to play a game,
 exit the program if the reply is equal to 300 words, exit the program. If the reply is less than 30 words
-redirect the user to play a logic.minesweeper game.
+redirect the user to play a games.minesweeper game.
 
 The race car game mechanics:
 -> user to input the race distance in meters.

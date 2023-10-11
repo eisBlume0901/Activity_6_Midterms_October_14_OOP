@@ -11,6 +11,7 @@ public class UserInfoAnalyzer {
     public static void main(String[] args) {
 
 
+
         System.out.println(countWords("Mary Kate Franco Anecito"));
         Scanner scanner = new Scanner(System.in);
 
@@ -21,6 +22,7 @@ public class UserInfoAnalyzer {
         String fullName = scanner.nextLine();
         int consonantCount = countConsonants(fullName);
         int vowelCount = countVowels(fullName);
+
         report.append("Comprehensive Report:\n");
         report.append("    ").append(fullName).append(", whose name has ").append(consonantCount)
                 .append(" consonants, ").append(vowelCount).append(" vowels,");
