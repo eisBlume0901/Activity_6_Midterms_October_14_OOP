@@ -43,7 +43,7 @@ public class ReportGenerator implements InputValidator, Searcher
         String barangay = person.getAddress().getBarangay();
         String city = person.getAddress().getCity();
         String region = searchRegion(person.getAddress().getCity());
-        report.append(fullName).append(", who lives in ").append(barangay).append(", ").append(city).append(", ").append(region);
+        report.append(firstName).append(", who lives in ").append(barangay).append(", ").append(city).append(", ").append(region);
 
         String course = person.getCourse().getCourseName();
         String industry = searchIndustry(course);
@@ -58,6 +58,8 @@ public class ReportGenerator implements InputValidator, Searcher
         Month birthMonth = person.getBirthDatePlace().getBirthMonth();
         int birthDay = person.getBirthDatePlace().getBirthDay();
         MonthDay birthdate = MonthDay.of(birthMonth, birthDay);
+
+        String birthMonthProperCapitalization = birthMonth.toString().substring(0, 1).toUpperCase() + birthMonth.toString().substring(1).toLowerCase();
         report.append(firstName).append("'s birth date is on ").append(birthMonth).append(", ").append(birthDay);
 
         String zodiacSign = userInfoAnalyzer.findZodiacSign(birthdate);

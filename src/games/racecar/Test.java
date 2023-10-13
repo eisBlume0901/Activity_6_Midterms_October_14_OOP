@@ -1,7 +1,7 @@
 package games.racecar;
-import javax.swing.*;
+import games.minesweeper.MineSweeperGame;
+
 import java.awt.*;
-import java.util.*;
 
 public class Test {
 
@@ -16,9 +16,15 @@ public class Test {
         System.out.println(screenWidth);
         System.out.println(screenHeight);
 
-        RaceCarGame game = new RaceCarGame();
-        Thread gameThread = new Thread(game);
-        gameThread.start();
+//        Game game = new Game();
+//        Thread gameThread = new Thread(game);
+//        gameThread.start();
+
+//        RaceCarGame raceCarGame = new RaceCarGame();
+//        raceCarGame.run();
+
+        MineSweeperGame mineSweeperGame = new MineSweeperGame();
+        mineSweeperGame.run();
     }
 
 }

@@ -1,7 +1,7 @@
 package userinterface;
 
 import games.minesweeper.MineSweeperGame;
-import games.racecar.RaceCarGame;
+import games.racecar.Game;
 import logic.EntryValidator;
 import logic.userInfoProcessorAndAnalyzer.ReportGenerator;
 import logic.userInfoProcessorAndAnalyzer.StringProcessor;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class UserInterface
 {
     private StringProcessor stringProcessor;
-    private RaceCarGame raceCarGame;
+    private Game raceCarGame;
     private MineSweeperGame mineSweeperGame;
     private ReportGenerator reportGenerator;
     private EntryValidator entryValidator;
@@ -39,8 +39,8 @@ public class UserInterface
             if ("yes".equals(playGame)) {
                 System.out.println("Redirecting you to play a 1 vs 1 race car game. Enjoy!");
                 // TODO: Redirects user to race car game :D
-                raceCarGame = new RaceCarGame();
-
+                raceCarGame = new Game();
+                raceCarGame.run();
             } else {
                 System.out.println("Exiting the program. Goodbye!");
                 System.exit(0); // Exit the program
