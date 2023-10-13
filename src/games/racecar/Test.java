@@ -20,11 +20,11 @@ public class Test {
 //        Thread gameThread = new Thread(game);
 //        gameThread.start();
 
-//        RaceCarGame raceCarGame = new RaceCarGame();
-//        raceCarGame.run();
+        RaceCarGame raceCarGame = new RaceCarGame();
+        raceCarGame.run();
 
-        MineSweeperGame mineSweeperGame = new MineSweeperGame();
-        mineSweeperGame.run();
+//        MineSweeperGame mineSweeperGame = new MineSweeperGame();
+//        mineSweeperGame.run();
     }
 
 }

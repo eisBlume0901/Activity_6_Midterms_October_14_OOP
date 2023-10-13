@@ -8,8 +8,8 @@ public class Game extends JFrame implements Runnable {
     Scanner scn = new Scanner(System.in);
     Toolkit toolkit = Toolkit.getDefaultToolkit();
     Dimension screenSize = toolkit.getScreenSize();
-    private int screenWidth = screenSize.width;
-    private int screenHeight = screenSize.height;
+    private int screenWidth = 1536;
+    private int screenHeight = 864;
     private boolean isAutomatic;
     private Car enemyCar;
     private Car playerCar;

@@ -76,23 +76,22 @@ public class GamePanel extends JPanel{
             hasTied = true;
             g.setColor(Color.PINK);
             g.setFont(new Font("Arial", Font.BOLD, 48));
-            g.drawString("TIE :I", playerCar.carX + cameraX - 40, playerCar.carY + cameraY - 450 - screenHeight / 2);
+            g.drawString("TIE :I", playerCar.carX + cameraX + screenWidth / 46 - 50, playerCar.carY + screenWidth / 16);
         }
 
         if (playerCar.carX >= trackLength && !hasTied) {
             playerCar.hasWon = true;
             g.setColor(Color.GREEN);
             g.setFont(new Font("Arial", Font.BOLD, 48));
-            g.drawString("YOU WON :D", playerCar.carX + cameraX - 40, playerCar.carY + cameraY - 450 - screenHeight / 2);
+            g.drawString("YOU WON :D", playerCar.carX + cameraX + screenWidth / 46 - 50, playerCar.carY + screenWidth / 16);
         }
 
         if (enemyCar.carX >= trackLength && !hasTied) {
             enemyCar.hasWon = true;
             g.setColor(Color.RED);
             g.setFont(new Font("Arial", Font.BOLD, 48));
-            g.drawString("YOU LOST :(", playerCar.carX + cameraX - 40, playerCar.carY + cameraY - 450 - screenHeight / 2);
+            g.drawString("YOU LOST :(", playerCar.carX + cameraX + screenWidth / 46 - 50, playerCar.carY + screenWidth / 16);
         }
-
         Font font = new Font("Arial", Font.BOLD, 75);
         g.setFont(font);
 
