@@ -39,29 +39,29 @@ public class Car {
         if (!isBot) {
 
             if (!hasOverheated) {
-            switch (state) {
 
-                case IDLE:
+                switch (state) {
 
-                    decelerate();
+                    case IDLE:
 
-                    break;
+                        decelerate();
 
-                case GAS:
+                        break;
 
-                    accelerate();
+                    case GAS:
 
-                    break;
+                        accelerate();
 
-                case BRAKES:
+                        break;
 
-                    brake();
+                    case BRAKES:
 
-                    break;
+                        brake();
+
+                        break;
+                }
             }
-            }
-            else
-            {
+            else {
                 decelerate();
             }
 

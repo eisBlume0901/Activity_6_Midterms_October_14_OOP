@@ -21,6 +21,18 @@ public class RaceCarGame extends JFrame implements Runnable {
     public RaceCarGame() {
 
         System.out.println("AUTOMATIC or MANUAL");
+        System.out.println("""
+                         Click any part of the pop-up game to enable keyboard input recognition.
+                                     
+                         Press the following keyboard letter
+                         for AUTOMATIC
+                         D - Move
+                         SPACE - Brakes
+                         
+                         for MANUAL
+                         SHIFT - Gear Up 
+                         CTRL - Gear Down
+                         """);
         String carType = scn.nextLine();
 
         isAutomatic = carType.equalsIgnoreCase("automatic");

@@ -1,12 +1,13 @@
 package logic.userInfoProcessorAndAnalyzer;
 
 import logic.validator.InputValidator;
+import logic.validator.Searcher;
 import pojo.Person;
 import java.time.*;
 import java.util.*;
 
 
-public class ReportGenerator implements InputValidator
+public class ReportGenerator implements InputValidator, Searcher
 {
     private StringProcessor stringProcessor;
     private UserInfoAnalyzer userInfoAnalyzer;
@@ -38,6 +39,15 @@ public class ReportGenerator implements InputValidator
                 person.getBirthDatePlace().getBirthDay()));
         String ageCategory = userInfoAnalyzer.determineAgeCategory(age);
         report.append(", is ").append(age).append(" years old, and falls into the ").append(ageCategory).append(" category. ");
+
+        String barangay = person.getAddress().getBarangay();
+        String city = person.getAddress().getCity();
+        String region = searchRegion(person.getAddress().getCity());
+        report.append(fullName).append(", who lives in ").append(barangay).append(", ").append(city).append(", ").append(region);
+
+        String course = person.getCourse().getCourseName();
+        String industry = searchIndustry(course);
+        report.append(", is currently studying ").append(course).append(" in order to prepare for the ").append(industry).append(" industry. ");
 
         int favoriteNumber = person.getUserNumber().getFavoriteNumber();
         String binaryValue = stringProcessor.toBinary(favoriteNumber);
