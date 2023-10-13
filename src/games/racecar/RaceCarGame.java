@@ -1,49 +1,75 @@
 package games.racecar;
-import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
+import java.util.*;
 
-public class RaceCarGame {
+public class RaceCarGame extends JFrame implements Runnable {
 
-    public static Scanner scanner = new Scanner(System.in);
-    public static int trackHeight;
-    public static boolean isAutomatic = true;
-    public static String modeChoice;
+    Scanner scn = new Scanner(System.in);
+    Toolkit toolkit = Toolkit.getDefaultToolkit();
+    Dimension screenSize = toolkit.getScreenSize();
+    private int screenWidth = screenSize.width;
+    private int screenHeight = screenSize.height;
+    private boolean isAutomatic;
+    private Car enemyCar;
+    private Car playerCar;
+    private Controller playerController;
+    private GamePanel gp;
+    private int trackLength;
+    public int countdown = 3;
 
-    public void run() {
+    public RaceCarGame() {
 
-        System.out.print("Is your car AUTOMATIC or MANUAL?: ");
-        modeChoice = scanner.nextLine();
+        System.out.println("AUTOMATIC or MANUAL");
+        String carType = scn.nextLine();
 
-        if (modeChoice.equalsIgnoreCase("Manual")) {
-            isAutomatic = false;
-            System.out.println("""
-                    "W" Move
-                    "Shift" Gear Up 
-                    "CTRL" Gearn Down
-                    "Space" Break                    
-                    """);
-            raceTrackLength();
-        } else if (modeChoice.equalsIgnoreCase("Automatic")) {
-            isAutomatic = true;
-            raceTrackLength();
-        } else {
-            System.out.print("Invalid Choice, Try again. ");
-            run();
-        }
+        isAutomatic = carType.equalsIgnoreCase("automatic");
+
+        System.out.println("Track Length (in Meters): ");
+        trackLength = scn.nextInt();
+        trackLength *= 4;
+
+        enemyCar = new Car(true, true);
+        playerCar = new Car(isAutomatic, false);
+        playerController = new Controller(playerCar);
+        gp = new GamePanel(playerCar, enemyCar, trackLength);
+
+        setTitle("VROOM VROOM!");
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+        setLocationRelativeTo(null);
+
+        addKeyListener(playerController);
+        setFocusable(true);
+
+        add(gp);
+        setVisible(true);
     }
 
-    public void raceTrackLength() {
+    @Override
+    public void run() {
 
-        try {
-            System.out.print("Enter the length of the racetrack (in meters): ");
-            trackHeight = scanner.nextInt();
+        while(true) {
 
-            RaceCar game = new RaceCar(trackHeight, isAutomatic);
-            Thread gameThread = new Thread(game);
-            gameThread.start();
+            repaint();
 
-        } catch(Exception e) {
-            System.out.println("Invalid Input");
+            if (gp.countdown <= 0 && !playerCar.hasWon && !enemyCar.hasWon && !gp.hasTied){
+
+                playerCar.stateMachine();
+                enemyCar.stateMachine();
+
+                try { //Cap game to 60-ish FPS. THIS IS WHAT HAS BEEN CAUSING ME ISSUES
+                    Thread.sleep(16);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
         }
+
     }
 
 }

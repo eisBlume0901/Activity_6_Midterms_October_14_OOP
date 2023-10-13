@@ -40,7 +40,7 @@ public class UserInterface
                 System.out.println("Redirecting you to play a 1 vs 1 race car game. Enjoy!");
                 // TODO: Redirects user to race car game :D
                 raceCarGame = new RaceCarGame();
-                raceCarGame.run();
+
             } else {
                 System.out.println("Exiting the program. Goodbye!");
                 System.exit(0); // Exit the program
