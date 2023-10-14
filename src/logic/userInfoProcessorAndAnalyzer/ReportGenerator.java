@@ -21,12 +21,14 @@ public class ReportGenerator implements InputValidator, Searcher
     public void displayReport(Person person)
     {
         StringBuilder report = new StringBuilder();
+        report.append("\tComprehensive Report: ");
+
         String fullName = person.getName().toString();
         String firstName = person.getName().getFirstName();
 
         int consonantCount = stringProcessor.countConsonants(fullName);
         int vowelCount = stringProcessor.countVowels(fullName);
-        report.append("\t\t").append(fullName).append(", whose name has ").append(consonantCount)
+        report.append(fullName).append(", whose name has ").append(consonantCount)
                 .append(" consonants, ").append(vowelCount).append(" vowels,");
 
         int wordCount = stringProcessor.countWords(fullName);
@@ -74,9 +76,7 @@ public class ReportGenerator implements InputValidator, Searcher
         report.append("The genre(s) of ").append(firstName).append("'s favorite movie, ").append(movieTitle).append(", is/are ").append(genres).append(". ");
 
         String movieCharacter = person.getMovie().getMovieCharacter();
-
         report.append(movieCharacter);
-
         if (isMainCharacter(movieTitle, movieCharacter))
             report.append(" is the main character").append(". ");
         if (isSupportingCharacter(movieTitle, movieCharacter))
@@ -84,13 +84,6 @@ public class ReportGenerator implements InputValidator, Searcher
 
         int numberOfChildren = person.getUserNumber().getPreferredNumberOfChildren();
         report.append(userInfoAnalyzer.providePsychologicalFeedback(numberOfChildren));
-
-        int reportLetterCount = stringProcessor.countLettersInText(report.toString());
-        int lettersPerLine = 300;
-        for (int i = lettersPerLine; i < reportLetterCount; i += lettersPerLine) {
-            report.insert(i, "\n");
-            reportLetterCount++;
-        }
 
         String formattedReport = stringProcessor.formatParagraph(report.toString());
         System.out.println(formattedReport);

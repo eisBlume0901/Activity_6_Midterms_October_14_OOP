@@ -10,7 +10,6 @@ import java.util.Random;
 
 public class GUI extends JFrame{
     public boolean resetter = false;
-
     public boolean flag = false;
 
     Date startDate = new Date();
