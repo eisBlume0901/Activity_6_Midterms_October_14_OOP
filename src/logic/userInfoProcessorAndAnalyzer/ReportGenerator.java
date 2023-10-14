@@ -26,8 +26,7 @@ public class ReportGenerator implements InputValidator, Searcher
 
         int consonantCount = stringProcessor.countConsonants(fullName);
         int vowelCount = stringProcessor.countVowels(fullName);
-        report.append("Comprehensive Report:\n");
-        report.append("    ").append(fullName).append(", whose name has ").append(consonantCount)
+        report.append("\t\t").append(fullName).append(", whose name has ").append(consonantCount)
                 .append(" consonants, ").append(vowelCount).append(" vowels,");
 
         int wordCount = stringProcessor.countWords(fullName);
@@ -60,7 +59,7 @@ public class ReportGenerator implements InputValidator, Searcher
         MonthDay birthdate = MonthDay.of(birthMonth, birthDay);
 
         String birthMonthProperCapitalization = birthMonth.toString().substring(0, 1).toUpperCase() + birthMonth.toString().substring(1).toLowerCase();
-        report.append(firstName).append("'s birth date is on ").append(birthMonth).append(", ").append(birthDay);
+        report.append(firstName).append("'s birth date is on ").append(birthMonthProperCapitalization).append(" ").append(birthDay);
 
         String zodiacSign = userInfoAnalyzer.findZodiacSign(birthdate);
         if (zodiacSign != null)

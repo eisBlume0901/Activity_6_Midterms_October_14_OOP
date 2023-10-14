@@ -71,16 +71,34 @@ public class StringProcessor
 
     public String formatParagraph(String paragraph) {
         StringBuilder formattedText = new StringBuilder();
-        List<String> lines = List.of(paragraph.split("\n"));
+        String[] words = paragraph.split("\\s+");
         int currentLineLength = 0;
-        for (String line : lines) {
-            if (currentLineLength + line.length() > 300) {
+        int currentParagraphLength = 0;
+        int linesInParagraph = 0;
+
+        for (String word : words) {
+            if (currentLineLength + word.length() + 1 <= 60) {
+                formattedText.append(word).append(" ");
+                currentLineLength += word.length() + 1;
+                currentParagraphLength += word.length() + 1;
+            } else {
                 formattedText.append("\n");
                 currentLineLength = 0;
+                linesInParagraph++;
+
+                if (linesInParagraph >= 5 || currentParagraphLength >= 300) {
+                    formattedText.append("\n\n");
+                    currentParagraphLength = 0;
+                    linesInParagraph = 0;
+                }
+
+                // Start a new line and add the current word
+                formattedText.append(word).append(" ");
+                currentLineLength += word.length() + 1;
+                currentParagraphLength += word.length() + 1;
             }
-            formattedText.append(line).append("\n");
-            currentLineLength += line.length();
         }
+
         return formattedText.toString();
     }
 }
