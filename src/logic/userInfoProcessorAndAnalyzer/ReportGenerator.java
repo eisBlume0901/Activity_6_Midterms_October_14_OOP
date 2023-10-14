@@ -21,7 +21,7 @@ public class ReportGenerator implements InputValidator, Searcher
     public void displayReport(Person person)
     {
         StringBuilder report = new StringBuilder();
-        report.append("\t\t\tComprehensive Report: ");
+        report.append("\t").append("Comprehensive Report: ");
 
         String fullName = person.getName().toString();
         String firstName = person.getName().getFirstName();
