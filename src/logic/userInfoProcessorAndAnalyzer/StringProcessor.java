@@ -77,11 +77,7 @@ public class StringProcessor
         int linesInParagraph = 0;
 
         for (String word : words) {
-            if (currentLineLength + word.length() + 1 <= 60) {
-                formattedText.append(word).append(" ");
-                currentLineLength += word.length() + 1;
-                currentParagraphLength += word.length() + 1;
-            } else {
+            if (currentLineLength + word.length() + 1 > 60) {
                 formattedText.append("\n");
                 currentLineLength = 0;
                 linesInParagraph++;
@@ -93,10 +89,10 @@ public class StringProcessor
                 }
 
                 // Start a new line and add the current word
-                formattedText.append(word).append(" ");
-                currentLineLength += word.length() + 1;
-                currentParagraphLength += word.length() + 1;
             }
+            formattedText.append(word).append(" ");
+            currentLineLength += word.length() + 1;
+            currentParagraphLength += word.length() + 1;
         }
 
         return formattedText.toString();

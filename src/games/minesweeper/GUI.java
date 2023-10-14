@@ -21,7 +21,6 @@ public class GUI extends JFrame{
     int gameMesY = -50;
     public int mx = -100;
     public int my = -100;
-
     public int smileyX = 605;
     public int smileyY = 5;
     public int smileyCenterX = smileyX + 35;
@@ -31,7 +30,6 @@ public class GUI extends JFrame{
     public int flagY = 5;
     public int flagCenterX = flagX + 35;
     public int flagCenterY = flagY + 35;
-
     public int spacingX = 90;
     public int spacingY = 10;
     public int minusX = spacingX + 160;
@@ -42,11 +40,9 @@ public class GUI extends JFrame{
     public int timeCountX = 1130;
     public int timeCountY = 5;
     public int sec = 0;
-
     public boolean happy = true;
     public boolean victory = false;
     public boolean defeat = false;
-
     static Random rand = new Random();
     static int[][] mines = new int[16][7];
     static int[][] neighbours = new int[16][7];
@@ -83,7 +79,7 @@ public class GUI extends JFrame{
                 for(int j =0; j < 7; j++){
                     g.setColor(Color.gray);
 
-//                    Reveals mines emplacement
+//                    Reveals mines placement
 //                    if(mines[i][j] == 1){
 //                        g.setColor(Color.yellow);
 //                    }

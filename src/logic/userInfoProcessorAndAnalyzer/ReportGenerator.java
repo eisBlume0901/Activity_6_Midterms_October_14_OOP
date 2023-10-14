@@ -21,7 +21,7 @@ public class ReportGenerator implements InputValidator, Searcher
     public void displayReport(Person person)
     {
         StringBuilder report = new StringBuilder();
-        report.append("\tComprehensive Report: ");
+        report.append("\t\t\tComprehensive Report: ");
 
         String fullName = person.getName().toString();
         String firstName = person.getName().getFirstName();
@@ -85,8 +85,8 @@ public class ReportGenerator implements InputValidator, Searcher
         int numberOfChildren = person.getUserNumber().getPreferredNumberOfChildren();
         report.append(userInfoAnalyzer.providePsychologicalFeedback(numberOfChildren));
 
-        String formattedReport = stringProcessor.formatParagraph(report.toString());
-        System.out.println(formattedReport);
+        String formattedText = stringProcessor.formatParagraph(report.toString());
+        System.out.println(formattedText);
     }
 
 }
