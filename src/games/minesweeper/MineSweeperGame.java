@@ -1,16 +1,24 @@
 package games.minesweeper;
 
 public class MineSweeperGame implements Runnable {
-    GUI gui = new GUI();
+    private GUI gui;
     @Override
     public void run() {
-
-        while(true){
+        gui = new GUI();
+        while(true)
+        {
             gui.repaint();
-            if(!gui.resetter) {
+            if(!gui.resetter)
+            {
                 gui.checkVictoryStatus();
 //                System.out.println("Victory: " + gui.victory + ", Defeat: " + gui.defeat);
             }
         }
+    }
+
+    public static void main(String[] args)
+    {
+        MineSweeperGame mineSweeperGame = new MineSweeperGame();
+        mineSweeperGame.run();
     }
 }

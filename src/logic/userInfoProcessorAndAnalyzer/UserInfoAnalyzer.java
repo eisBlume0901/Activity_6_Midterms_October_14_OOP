@@ -20,40 +20,34 @@ public class UserInfoAnalyzer
         }
     }
 
-    private Map<MonthDay, String> createZodiacMap() {
-        Map<MonthDay, String> zodiacMap = new HashMap<>();
-        zodiacMap.put(MonthDay.of(3, 21), "Aries");
-        zodiacMap.put(MonthDay.of(4, 20), "Taurus");
-        zodiacMap.put(MonthDay.of(5, 21), "Gemini");
-        zodiacMap.put(MonthDay.of(6, 21), "Cancer");
-        zodiacMap.put(MonthDay.of(7, 23), "Leo");
-        zodiacMap.put(MonthDay.of(8, 23), "Virgo");
-        zodiacMap.put(MonthDay.of(9, 23), "Libra");
-        zodiacMap.put(MonthDay.of(10, 23), "Scorpio");
-        zodiacMap.put(MonthDay.of(11, 22), "Sagittarius");
-        zodiacMap.put(MonthDay.of(12, 22), "Capricorn");
-        zodiacMap.put(MonthDay.of(1, 20), "Aquarius");
-        zodiacMap.put(MonthDay.of(2, 19), "Pisces");
-        return zodiacMap;
-    }
-
-    private MonthDay nextMonthDay(MonthDay monthDay) {
+    public String findZodiacSign(MonthDay monthDay) {
         int month = monthDay.getMonthValue();
         int day = monthDay.getDayOfMonth();
-        if (month == 12 && day == 22) {
-            return MonthDay.of(1, 19); // Wrap around to January for Capricorn
-        } else {
-            return MonthDay.of(month + 1, day);
-        }
-    }
 
-    public String findZodiacSign(MonthDay birthdate) {
-        Map<MonthDay, String> zodiacMap = createZodiacMap();
-        for (Map.Entry<MonthDay, String> entry : zodiacMap.entrySet()) {
-            if (birthdate.equals(entry.getKey()) || (birthdate.isAfter(entry.getKey()) && birthdate.isBefore(nextMonthDay(entry.getKey())))) {
-                return entry.getValue();
-            }
-        }
+        if ((month == 12 && day >= 22 && day <= 31) || (month == 1 && day >= 1 && day <= 19))
+            return "Capricorn";
+        else if ((month == 1 && day >= 20 && day <= 31) || (month == 2 && day >= 1 && day <= 17))
+            return "Aquarius";
+        else if ((month == 2 && day >= 18 && day <= 29) || (month == 3 && day >= 1 && day <= 19))
+            return "Pisces";
+        else if ((month == 3 && day >= 20 && day <= 31) || (month == 4 && day >= 1 && day <= 19))
+            return "Aries";
+        else if ((month == 4 && day >= 20 && day <= 30) || (month == 5 && day >= 1 && day <= 20))
+            return "Taurus";
+        else if ((month == 5 && day >= 21 && day <= 31) || (month == 6 && day >= 1 && day <= 20))
+            return "Gemini";
+        else if ((month == 6 && day >= 21 && day <= 30) || (month == 7 && day >= 1 && day <= 22))
+            return "Cancer";
+        else if ((month == 7 && day >= 23 && day <= 31) || (month == 8 && day >= 1 && day <= 22))
+            return "Leo";
+        else if ((month == 8 && day >= 23 && day <= 31) || (month == 9 && day >= 1 && day <= 22))
+            return "Virgo";
+        else if ((month == 9 && day >= 23 && day <= 30) || (month == 10 && day >= 1 && day <= 22))
+            return "Libra";
+        else if ((month == 10 && day >= 23 && day <= 31) || (month == 11 && day >= 1 && day <= 21))
+            return "Scorpio";
+        else if ((month == 11 && day >= 22 && day <= 30) || (month == 12 && day >= 1 && day <= 21))
+            return "Sagittarius";
         return null;
     }
 
@@ -69,5 +63,4 @@ public class UserInfoAnalyzer
         }
         return result;
     }
-
 }

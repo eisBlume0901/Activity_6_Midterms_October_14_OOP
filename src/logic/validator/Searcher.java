@@ -59,4 +59,10 @@ public interface Searcher
         return courseIndustryMap.get(input);
     }
 
+    default boolean courseExists(String input)
+    {
+        Map<String, String> regionCityMap = storeCoursesIndustriesToMap();
+        return regionCityMap.containsKey(input);
+    }
+
 }

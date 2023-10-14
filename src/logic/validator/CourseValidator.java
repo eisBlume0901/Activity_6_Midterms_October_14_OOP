@@ -27,7 +27,8 @@ public class CourseValidator implements ValidationMethod, InputValidator, Search
         System.out.println(ANSI_GREEN + "Course: " + ANSI_RESET);
         String courseName = scanner.nextLine();
 
-        if (isSentenceValid(courseName))
+        if (isSentenceValid(courseName) &&
+            courseExists(courseName) )
         {
             course = new Course();
             course.setCourseName(courseName);
