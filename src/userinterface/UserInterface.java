@@ -2,6 +2,7 @@ package userinterface;
 
 import games.minesweeper.MineSweeperGame;
 import games.racecar.Game;
+import games.racecar.RaceCarGame;
 import logic.EntryValidator;
 import logic.userInfoProcessorAndAnalyzer.ReportGenerator;
 import logic.userInfoProcessorAndAnalyzer.StringProcessor;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 public class UserInterface
 {
     private StringProcessor stringProcessor;
-    private Game raceCarGame;
+    private RaceCarGame raceCarGame;
     private MineSweeperGame mineSweeperGame;
     private ReportGenerator reportGenerator;
     private EntryValidator entryValidator;
@@ -23,6 +24,8 @@ public class UserInterface
         reportGenerator = new ReportGenerator();
         entryValidator = new EntryValidator();
         scanner = new Scanner(System.in);
+        mineSweeperGame = new MineSweeperGame();
+        raceCarGame = new RaceCarGame();
     }
     public void start() {
         // Ask the user for a reply
@@ -39,7 +42,6 @@ public class UserInterface
             if ("yes".equals(playGame)) {
                 System.out.println("Redirecting you to play a 1 vs 1 race car game. Enjoy!");
                 // TODO: Redirects user to race car game :D
-                raceCarGame = new Game();
                 raceCarGame.run();
             } else {
                 System.out.println("Exiting the program. Goodbye!");
@@ -51,7 +53,6 @@ public class UserInterface
         } else {
             System.out.println("Your reply is less than 30 words. Redirecting you to play a minesweeper game. Enjoy!");
             // TODO: Insert minesweeper heeere
-            mineSweeperGame = new MineSweeperGame();
             mineSweeperGame.run();
         }
     }
