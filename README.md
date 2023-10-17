@@ -76,7 +76,7 @@ The race car game mechanics:
 1. Go to src folder.
 2. Open the `Main.java` file outside the packages.
 3. Make sure the following code is present
-```
+```java
 import userinterface.UserInterface;
 public class Main
 {
