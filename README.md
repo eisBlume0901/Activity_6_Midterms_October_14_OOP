@@ -88,6 +88,7 @@ public class Main
 }
 ```
 4. Run the `Main.java` to execute the program
+5. Sample output: https://youtu.be/Hg783YzIutg
 
 ## License
 Copyright (c) 2023 eisBlume0901
