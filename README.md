@@ -1,5 +1,6 @@
 # Midterm Problem
 Coded by [eisBlume0901](https://github.com/eisBlume0901) 
+
 Create a program that will accept the following details and will
 provide a comprehensive analysis of the input details from the user:
 
@@ -43,9 +44,11 @@ reply of the user is greater than 30 words -> if yes, ask the user if he/she wan
 and exit the program if the reply is equal to 30 words, exit the program. If the reply is less than 30 words
 
 Coded by [0ngskie](https://github.com/0ngskie)
+
 redirect the user to play a minesweeper game.
 
 Coded by [MyPhillings](https://github.com/MyPhilings)
+
 The race car game mechanics:
 
 -> user to input the race distance in meters.
